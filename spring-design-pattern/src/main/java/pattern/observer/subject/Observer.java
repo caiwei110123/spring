@@ -8,7 +8,7 @@ import pattern.observer.core.Event;
 public class Observer {
 
     public void advice(Event e){
-        System.out.println("=========è§¦å‘äº‹ä»¶ï¼Œæ‰“å°æ—¥å¿—========\n" + e);
+        System.out.println("=========´¥·¢ÊÂ¼ş£¬´òÓ¡ÈÕÖ¾========\n" + e);
 
         /*
         *  input

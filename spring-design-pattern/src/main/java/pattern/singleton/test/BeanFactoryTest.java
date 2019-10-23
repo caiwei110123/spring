@@ -33,7 +33,7 @@ public class BeanFactoryTest {
                         }
 
                         //必然会调用，可能会有很多线程同时去访问getInstance()
-                        Object obj = BeanFactory.getBean("com.gupaoedu.vip.pattern.singleton.test.Pojo");;
+                        Object obj = BeanFactory.getBean("com.gupaoedu.vip.pattern.singleton.test1.Pojo");;
                         System.out.println(System.currentTimeMillis() + ":" + obj);
 
                     }catch (Exception e){

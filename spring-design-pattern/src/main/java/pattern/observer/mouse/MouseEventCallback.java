@@ -3,37 +3,37 @@ package pattern.observer.mouse;
 import pattern.observer.core.Event;
 
 /**
- * è§‚å¯Ÿè€…
+ * ¹Û²ìÕß
  *
- * å›è°ƒå“åº”çš„é€»è¾‘ï¼Œç”±è‡ªå·±å®ç°
+ * »Øµ÷ÏìÓ¦µÄÂß¼­£¬ÓÉ×Ô¼ºÊµÏÖ
  * Created by Tom on 2018/3/17.
  */
 public class MouseEventCallback {
 
     public void onClick(Event e){
-        System.out.println("è¿™æ˜¯é¼ æ ‡å•å‡»ä»¥åè¦æ‰§è¡Œçš„é€»è¾‘");
-        System.out.println("=======è§¦å‘é¼ æ ‡å•å‡»äº‹ä»¶========\n" + e);
+        System.out.println("ÕâÊÇÊó±êµ¥»÷ÒÔºóÒªÖ´ĞĞµÄÂß¼­");
+        System.out.println("=======´¥·¢Êó±êµ¥»÷ÊÂ¼ş========\n" + e);
     }
 
     public void onDoubleClick(Event e){
-        System.out.println("=======è§¦å‘é¼ æ ‡åŒå‡»äº‹ä»¶========\n" + e);
+        System.out.println("=======´¥·¢Êó±êË«»÷ÊÂ¼ş========\n" + e);
     }
 
     public void onUp(Event e){
-        System.out.println("=======è§¦å‘é¼ æ ‡å¼¹èµ·äº‹ä»¶========\n" + e);
+        System.out.println("=======´¥·¢Êó±êµ¯ÆğÊÂ¼ş========\n" + e);
     }
     public void onDown(Event e){
-        System.out.println("=======è§¦å‘é¼ æ ‡æŒ‰ä¸‹äº‹ä»¶========\n" + e);
+        System.out.println("=======´¥·¢Êó±ê°´ÏÂÊÂ¼ş========\n" + e);
     }
     public void onMove(Event e){
-        System.out.println("=======è§¦å‘é¼ æ ‡ç§»åŠ¨äº‹ä»¶========\n" + e);
+        System.out.println("=======´¥·¢Êó±êÒÆ¶¯ÊÂ¼ş========\n" + e);
     }
     public void onWheel(Event e){
-        System.out.println("=======è§¦å‘é¼ æ ‡æ»šåŠ¨äº‹ä»¶========\n" + e);
+        System.out.println("=======´¥·¢Êó±ê¹ö¶¯ÊÂ¼ş========\n" + e);
     }
 
     public void onOver(Event e){
-        System.out.println("=======è§¦å‘é¼ æ ‡æ‚¬åœäº‹ä»¶========\n" + e);
+        System.out.println("=======´¥·¢Êó±êĞüÍ£ÊÂ¼ş========\n" + e);
     }
 
 

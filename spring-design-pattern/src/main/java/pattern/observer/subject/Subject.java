@@ -7,14 +7,14 @@ import pattern.observer.core.EventLisenter;
  */
 public class Subject extends EventLisenter {
 
-    //é€šå¸¸çš„è¯ï¼Œé‡‡ç”¨åŠ¨æ€é‡Œæ¥å®ç°ç›‘æ§ï¼Œé¿å…äº†ä»£ç ä¾µå…¥
+    //Í¨³£µÄ»°£¬²ÉÓÃ¶¯Ì¬ÀïÀ´ÊµÏÖ¼à¿Ø£¬±ÜÃâÁË´úÂëÇÖÈë
     public void add(){
-        System.out.println("è°ƒç”¨æ·»åŠ çš„æ–¹æ³•");
+        System.out.println("µ÷ÓÃÌí¼ÓµÄ·½·¨");
         trigger(SubjectEventType.ON_ADD);
     }
 
     public void remove(){
-        System.out.println("è°ƒç”¨åˆ é™¤çš„æ–¹æ³•");
+        System.out.println("µ÷ÓÃÉ¾³ıµÄ·½·¨");
         trigger(SubjectEventType.ON_RMOVE);
     }
 

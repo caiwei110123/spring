@@ -3,46 +3,46 @@ package pattern.observer.mouse;
 import pattern.observer.core.EventLisenter;
 
 /**
- * è¢«è§‚å¯Ÿè€…
- * å¦‚æœåšè¿‡Swingå¼€å‘çš„è¯ï¼Œæœ‰ä¸€ç§ä¼¼æ›¾ç›¸è¯†çš„æ„Ÿè§‰
+ * ±»¹Û²ìÕß
+ * Èç¹û×ö¹ıSwing¿ª·¢µÄ»°£¬ÓĞÒ»ÖÖËÆÔøÏàÊ¶µÄ¸Ğ¾õ
  * Created by Tom on 2018/3/17.
  */
 public class Mouse extends EventLisenter {
 
     public void click(){
-        System.out.println("é¼ æ ‡å•å‡»");
+        System.out.println("Êó±êµ¥»÷");
         this.trigger(MouseEventType.ON_CLICK);
     }
 
 
     public void doubleClick(){
-        System.out.println("é¼ æ ‡åŒå‡»");
+        System.out.println("Êó±êË«»÷");
         this.trigger(MouseEventType.ON_DOUBLE_CLICK);
     }
 
     public void up(){
-        System.out.println("é¼ æ ‡å¼¹èµ·");
+        System.out.println("Êó±êµ¯Æğ");
         this.trigger(MouseEventType.ON_UP);
     }
 
     public void down(){
-        System.out.println("é¼ æ ‡æŒ‰ä¸‹");
+        System.out.println("Êó±ê°´ÏÂ");
         this.trigger(MouseEventType.ON_DOWN);
     }
 
 
     public void wheel(){
-        System.out.println("é¼ æ ‡æ»šåŠ¨");
+        System.out.println("Êó±ê¹ö¶¯");
         this.trigger(MouseEventType.ON_WHEEL);
     }
 
     public void move(){
-        System.out.println("é¼ æ ‡ç§»åŠ¨");
+        System.out.println("Êó±êÒÆ¶¯");
         this.trigger(MouseEventType.ON_MOVE);
     }
 
     public void over(){
-        System.out.println("é¼ æ ‡æ‚¬åœ");
+        System.out.println("Êó±êĞüÍ£");
         this.trigger(MouseEventType.ON_OVER);
     }
 

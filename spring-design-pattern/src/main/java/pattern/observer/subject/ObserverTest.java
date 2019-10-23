@@ -14,12 +14,12 @@ public class ObserverTest {
 
         try{
 
-            //è§‚å¯Ÿè€…
+            //¹Û²ìÕß
             Observer observer = new Observer();
             Method advice = Observer.class.getMethod("advice", new Class<?>[]{Event.class});
 
 
-            //è¿™é‡Œå†™Lily
+            //ÕâÀïÐ´Lily
             Subject subject = new Subject();
             subject.addLisenter(SubjectEventType.ON_ADD,observer,advice);
             subject.addLisenter(SubjectEventType.ON_EDIT,observer,advice);

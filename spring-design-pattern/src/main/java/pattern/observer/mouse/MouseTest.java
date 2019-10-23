@@ -14,18 +14,18 @@ public class MouseTest {
         * var input = document.getElementById("username");
         * input.addLisenter("click",function(){
         *
-        *     alert("é¼ æ ‡ç‚¹å‡»äº†è¿™ä¸ªæ–‡æœ¬æ¡†");
+        *     alert("Êó±êµã»÷ÁËÕâ¸öÎÄ±¾¿ò");
         *
         * });
         *
         *
         * */
 
-        //è§‚å¯Ÿè€…å’Œè¢«è§‚å¯Ÿè€…ä¹‹é—´æ²¡æœ‰å¿…ç„¶è”ç³»
-        //æ³¨å†Œçš„æ—¶å€™ï¼Œæ‰äº§ç”Ÿè”ç³»
+        //¹Û²ìÕßºÍ±»¹Û²ìÕßÖ®¼äÃ»ÓĞ±ØÈ»ÁªÏµ
+        //×¢²áµÄÊ±ºò£¬²Å²úÉúÁªÏµ
 
 
-        //è§£è€¦
+        //½âñî
 
 
         try {
@@ -33,7 +33,7 @@ public class MouseTest {
 //            Method onClick = MouseEventCallback.class.getMethod("onClick", Event.class);
 
 
-            //äººä¸ºçš„è°ƒç”¨é¼ æ ‡çš„å•å‡»äº‹ä»¶
+            //ÈËÎªµÄµ÷ÓÃÊó±êµÄµ¥»÷ÊÂ¼ş
             Mouse mouse = new Mouse();
 //            mouse.addLisenter(MouseEventType.ON_CLICK, callback,onClick);
 
