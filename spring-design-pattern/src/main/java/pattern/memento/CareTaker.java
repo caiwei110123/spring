@@ -3,7 +3,6 @@ package pattern.memento;
 /**
  * ¹¦ÄÜÃèÊö£º
  *
- * @author : yilie
  * @date : 2019/10/23  ÏÂÎç5:02
  * @Version 1.0
  */
