@@ -1,12 +1,13 @@
 package pattern.proxy.cglib;
 
+import net.sf.cglib.util.StringSwitcher;
+
 /**
  * Created by Tom on 2018/3/10.
  */
 public class CglibTest {
 
     public static void main(String[] args) {
-
         try {
             ZhangSan obj = (ZhangSan)new CglibMeipo().getInstance(ZhangSan.class);
             obj.findLove();

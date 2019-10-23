@@ -15,7 +15,7 @@ public class SiginService {
      * @return
      */
     public ResultMsg regist(String username, String password){
-        return  new ResultMsg(200,"注册成功",new Member());
+        return  new ResultMsg("200","注册成功",new Member());
     }
 
 

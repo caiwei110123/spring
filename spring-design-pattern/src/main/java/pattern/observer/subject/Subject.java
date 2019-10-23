@@ -1,11 +1,11 @@
 package pattern.observer.subject;
 
-import gupaoedu.vip.pattern.observer.core.EventLisenter;
+import pattern.observer.core.EventLisenter;
 
 /**
  * Created by Tom on 2018/3/17.
  */
-public class Subject extends EventLisenter{
+public class Subject extends EventLisenter {
 
     //通常的话，采用动态里来实现监控，避免了代码侵入
     public void add(){

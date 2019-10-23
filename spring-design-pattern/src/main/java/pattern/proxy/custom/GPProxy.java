@@ -6,7 +6,6 @@ import javax.tools.ToolProvider;
 import java.io.File;
 import java.io.FileWriter;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.Executable;
 import java.lang.reflect.Method;
 
 /**

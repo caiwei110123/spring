@@ -1,8 +1,8 @@
 package pattern.decorator.passport;
 
-import com.gupaoedu.vip.pattern.decorator.passport.old.SigninService;
-import com.gupaoedu.vip.pattern.decorator.passport.upgrede.ISigninForThirdService;
-import com.gupaoedu.vip.pattern.decorator.passport.upgrede.SigninForThirdService;
+import pattern.decorator.passport.old.SigninService;
+import pattern.decorator.passport.upgrede.ISigninForThirdService;
+import pattern.decorator.passport.upgrede.SigninForThirdService;
 
 /**
  * Created by Tom on 2018/3/17.

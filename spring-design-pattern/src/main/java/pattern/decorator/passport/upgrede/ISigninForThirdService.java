@@ -1,7 +1,7 @@
 package pattern.decorator.passport.upgrede;
 
-import com.gupaoedu.vip.pattern.decorator.passport.old.ISigninService;
-import com.gupaoedu.vip.pattern.decorator.passport.old.ResultMsg;
+import pattern.decorator.passport.old.ISigninService;
+import pattern.decorator.passport.old.ResultMsg;
 
 /**
  * Created by Tom on 2018/3/17.

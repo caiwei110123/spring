@@ -1,8 +1,7 @@
 package pattern.strategy.pay;
 
-import com.gupaoedu.vip.pattern.strategy.pay.Order;
-import com.gupaoedu.vip.pattern.strategy.pay.payport.PayType;
-import com.gupaoedu.vip.pattern.strategy.pay.payport.Payment;
+
+import pattern.strategy.pay.payport.PayType;
 
 import java.util.ArrayList;
 import java.util.Comparator;

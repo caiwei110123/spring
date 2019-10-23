@@ -1,6 +1,7 @@
 package pattern.observer.subject;
 
-import gupaoedu.vip.pattern.observer.core.Event;
+
+import pattern.observer.core.Event;
 
 import java.lang.reflect.Method;
 
