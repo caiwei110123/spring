@@ -1,0 +1,99 @@
+package com.itheima.web.utils;
+
+import com.itheima.common.utils.UtilFuns;
+import com.itheima.domain.system.SysLog;
+import com.itheima.domain.system.User;
+import com.itheima.service.system.SysLogService;
+import javassist.bytecode.SignatureAttribute;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.Signature;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.reflect.MethodSignature;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.lang.reflect.Method;
+import java.util.Date;
+
+/**
+ * 用于记录系统操作日志
+ * 需求 用户点击连接请求到达控制器之前
+ * 在控制器之前 记录系统日志
+ * <p>
+ * 要求   使用spring 基于注解的 aop 配置  使用环绕通知
+ */
+@Aspect     // 1. 让当前类变成切面类
+@Component  // 2. 让spring接管切面类的创建
+public class LogAspect {
+    @Autowired
+    private SysLogService sysLogService;
+
+    @Autowired
+    private HttpSession session;
+
+    @Autowired
+    private HttpServletRequest request;
+
+    /**
+     * @param pjp 这是用于调用切入点方法(核心方法)的对象
+     * @return private String id;          日志的唯一标识，此处不用处理，在service中处理
+     * private String userName;    用户的名称，此处要处理     在用户对象里，用户对象在session域中，需要一个session
+     * private String ip;          来访者ip，此处要处理       在request对象里                   需要一个request
+     * private Date time;          来访时间，此处要处理       获取当前系统时间
+     * private String method;      操作的方法，此处要处理     在环绕通知的参数中（pjp）
+     * private String action;      操作的名称，此处要处理     在环绕通知的参数中，同时要求控制器方法的RequestMapping注解的name属性必须有值
+     * private String companyId;   来访者的企业id            在用户对象里
+     * private String companyName; 来访者的企业名称           在用户对象里
+     */
+    //3.环绕通知  指定切入点表达式   不定义返回值类型  在此路径下的 所有包 所有类 所有方法 不限制参数
+    @Around("execution ( * com.itheima.web.controller.*.*.*(..))")
+    //环绕通知需要得知方法的参数    (一个接口方法的参数)
+    public Object aroundSysLog(ProceedingJoinPoint pjp) {
+        System.out.println("记录日志的方法执行了");
+        try {
+
+            //获取 method 操作方法  action 操作名称
+            //首先获取ProceedingJoinPoint 签名  (方法有签名   方法名称 返回值类型 参数类型 及 参数个数)
+            Signature signature = pjp.getSignature();
+            if (signature instanceof MethodSignature) {  //判断当前签名是不是方法签名
+
+                MethodSignature methodSignature = (MethodSignature) signature; //如果是的话 就进行转换成方法签名
+                Method method = methodSignature.getMethod();//获取方法
+                if (method.isAnnotationPresent(RequestMapping.class)) {//判断当前方法是否被RequestMapping注解了 只有注解 才能获取的 方法
+                    SysLog log = new SysLog();
+                    //添加信息
+                    User user = (User) session.getAttribute("user");
+                    if (user == null || UtilFuns.isEmpty(user.getUserName())) { //非法访问 没有进行登陆
+                        log.setUserName("非法访问");
+                    } else { //正常操作
+                        log.setUserName(user.getUserName());
+                        log.setCompanyId(user.getCompanyId());
+                        log.setCompanyName(user.getCompanyName());
+                    }
+                    log.setTime(new Date());
+                    log.setIp(request.getRemoteAddr());
+                    //在通过注解  取出注解内容
+                    RequestMapping annotation = method.getAnnotation(RequestMapping.class);
+                    String action = annotation.name();
+                    log.setAction(action); //操作名称
+                    log.setMethod(method.getName());//方法名称
+                    sysLogService.save(log);
+                }
+            }
+            //1.获取当前执行方法所需的参数
+            Object[] args = pjp.getArgs();
+            //2.执行方法并返回
+            return pjp.proceed(args);
+        } catch (Throwable e) {
+            throw new RuntimeException(e);
+        }
+    }
+    //4  在配置文件中 开启 spring 对注解aop的支持
+    //<aop:aspectj-autoproxy/>
+}
+
