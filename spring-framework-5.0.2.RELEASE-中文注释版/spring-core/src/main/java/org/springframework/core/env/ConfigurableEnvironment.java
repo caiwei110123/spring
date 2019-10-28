@@ -69,6 +69,12 @@ import java.util.Map;
  * @see StandardEnvironment
  * @see org.springframework.context.ConfigurableApplicationContext#getEnvironment
  */
+/**
+ * ConfigurableEnvironment接口有两个重要部分组成：Profile和Property；
+Profile是对测试、生产等不同环境下的bean配置，这里我们没有特别设置，所以用到的profile是AbstractEnvironment的defaultProfiles；
+ * @author cw
+ *
+ */
 public interface ConfigurableEnvironment extends Environment, ConfigurablePropertyResolver {
 
 	/**

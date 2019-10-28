@@ -128,6 +128,7 @@ public abstract class AbstractRefreshableConfigApplicationContext extends Abstra
 	 * @see org.springframework.core.env.Environment#resolveRequiredPlaceholders(String)
 	 */
 	protected String resolvePath(String path) {
+		//这个方法的目的是替换掉path字符串中的占位符${XXX}这样的内容
 		return getEnvironment().resolveRequiredPlaceholders(path);
 	}
 

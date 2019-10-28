@@ -108,6 +108,9 @@ public abstract class AbstractEnvironment implements ConfigurableEnvironment {
 
 	private final MutablePropertySources propertySources = new MutablePropertySources(this.logger);
 
+	/**
+	 * final型的成员变量在声明时就创建了，前面准备好的propertySources集合通过构造方法传给了它，所有它已经获得了所有系统环境变量和进程环境变量
+	 */
 	private final ConfigurablePropertyResolver propertyResolver =
 			new PropertySourcesPropertyResolver(this.propertySources);
 
