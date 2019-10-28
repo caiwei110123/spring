@@ -41,6 +41,11 @@ import java.security.PrivilegedExceptionAction;
  * @author Juergen Hoeller
  * @since 1.1
  */
+/**
+ * 简单的根据构造函数和参数来创建bean
+ * @author cw
+ *
+ */
 public class SimpleInstantiationStrategy implements InstantiationStrategy {
 
 	private static final ThreadLocal<Method> currentlyInvokedFactoryMethod = new ThreadLocal<>();
@@ -61,7 +66,8 @@ public class SimpleInstantiationStrategy implements InstantiationStrategy {
 	@Override
 	public Object instantiate(RootBeanDefinition bd, @Nullable String beanName, BeanFactory owner) {
 		// Don't override the class with CGLIB if no overrides.
-		//如果Bean定义中没有方法覆盖，则就不需要CGLIB父类类的方法
+		//如果Bean定义中没有方法覆盖，则就不需要CGLIB父类类的方法,
+		////如果不存在 lookup-override或者replace-override属性的话，直接通过构造函数和参数进行实例化
 		if (!bd.hasMethodOverrides()) {
 			Constructor<?> constructorToUse;
 			synchronized (bd.constructorArgumentLock) {
@@ -81,6 +87,7 @@ public class SimpleInstantiationStrategy implements InstantiationStrategy {
 									(PrivilegedExceptionAction<Constructor<?>>) () -> clazz.getDeclaredConstructor());
 						}
 						else {
+							//直接通过反射获取无参构造函数
 							constructorToUse =	clazz.getDeclaredConstructor();
 						}
 						bd.resolvedConstructorOrFactoryMethod = constructorToUse;
@@ -96,6 +103,7 @@ public class SimpleInstantiationStrategy implements InstantiationStrategy {
 		else {
 			// Must generate CGLIB subclass.
 			//使用CGLIB来实例化对象
+			//如果不存在 lookup-override或者replace-override属性的话，直接通过构造函数和参数进行实例化
 			return instantiateWithMethodInjection(bd, beanName, owner);
 		}
 	}

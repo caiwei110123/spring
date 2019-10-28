@@ -36,9 +36,19 @@ import org.springframework.lang.Nullable;
  * @see RootBeanDefinition
  * @see ChildBeanDefinition
  */
+/**
+ * spring初始化时，会用GenericBeanDefinition或是ConfigurationClassBeanDefinition（用@Bean注解注释的类）
+ * 存储用户自定义的Bean，在初始化Bean时，又会将其转换为RootBeanDefinition
+ * @author cw
+ *
+ */
 @SuppressWarnings("serial")
 public class GenericBeanDefinition extends AbstractBeanDefinition {
 
+	//当前类的父类
+	/**
+	 * 最重要的是它实现了parentName属性的setter、getter函数，RootBeanDefinition没有parentName属性，对应的getter函数只是返回null，setter函数不提供赋值操作
+	 */
 	@Nullable
 	private String parentName;
 

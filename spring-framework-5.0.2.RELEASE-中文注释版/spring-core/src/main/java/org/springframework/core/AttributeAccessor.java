@@ -47,6 +47,7 @@ public interface AttributeAccessor {
 	 * @param name the unique attribute key
 	 * @return the current value of the attribute, if any
 	 */
+	//获取标识为name的属性的值。
 	@Nullable
 	Object getAttribute(String name);
 

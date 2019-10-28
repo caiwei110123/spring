@@ -34,19 +34,25 @@ public interface MethodMetadata extends AnnotatedTypeMetadata {
 	/**
 	 * Return the name of the method.
 	 */
+	//返回方法的名字
 	String getMethodName();
 
 	/**
 	 * Return the fully-qualified name of the class that declares this method.
 	 */
+	//返回该方法所属的类的全限定名
 	String getDeclaringClassName();
 
 	/**
 	 * Return the fully-qualified name of this method's declared return type.
 	 * @since 4.2
 	 */
+	//返回该方法返回类型的全限定名
 	String getReturnTypeName();
 
+	/**
+	 * 以下接口判断方法是不是抽象、静态、final、override
+	 */
 	/**
 	 * Return whether the underlying method is effectively abstract:
 	 * i.e. marked as abstract on a class or declared as a regular,

@@ -26,12 +26,17 @@ import org.springframework.lang.Nullable;
 /**
  * Interface responsible for creating instances corresponding to a root bean definition.
  *
- * <p>This is pulled out into a strategy as various approaches are possible,
- * including using CGLIB to create subclasses on the fly to support Method Injection.
+ * <p>This is pulled out into a strategy as various approaches【各种各样的方法】 are possible,
+ * including using CGLIB to create subclasses on the fly to support【动态支持】 Method Injection【方法注入】.
  *
  * @author Rod Johnson
  * @author Juergen Hoeller
  * @since 1.1
+ */
+/**
+ * 策略模式的类
+ * @author cw
+ *
  */
 public interface InstantiationStrategy {
 

@@ -29,6 +29,11 @@ import org.springframework.util.StringUtils;
  * @author Juergen Hoeller
  * @since 03.09.2003
  */
+/**
+ * 异常：一个bean依赖了其他的bean或者简单的属性，但是没有在bean  factory definition中定义，抛出异常。
+ * @author cw
+ *
+ */
 @SuppressWarnings("serial")
 public class UnsatisfiedDependencyException extends BeanCreationException {
 
