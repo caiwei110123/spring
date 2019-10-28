@@ -83,6 +83,7 @@ public abstract class AbstractRefreshableConfigApplicationContext extends Abstra
 			this.configLocations = new String[locations.length];
 			for (int i = 0; i < locations.length; i++) {
 				// resolvePath为同一个类中将字符串解析为路径的方法
+			//此处应该是方法resolvePath(“classpath:applicationContext.xml”)；
 				this.configLocations[i] = resolvePath(locations[i]).trim();
 			}
 		}

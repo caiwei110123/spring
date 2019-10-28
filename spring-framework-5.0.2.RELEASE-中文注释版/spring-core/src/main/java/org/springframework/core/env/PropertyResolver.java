@@ -27,6 +27,12 @@ import org.springframework.lang.Nullable;
  * @see Environment
  * @see PropertySourcesPropertyResolver
  */
+/**
+ * 根据基础资源，解析属性
+ * @author cw
+ *
+ */
+//属性解决器
 public interface PropertyResolver {
 
 	/**

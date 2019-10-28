@@ -270,6 +270,10 @@ public abstract class AbstractPropertyResolver implements ConfigurablePropertyRe
 	 * @param key the property name to resolve
 	 * @return the property value or {@code null} if none found
 	 */
+	/**
+	* 当前类还额外定义了一个抽象方法，用于直接返回获取到的value值（不进行占位符替换）。
+	* 一般的getProperty方法默认都会替换掉value值中的占位符后返回。
+	*/
 	@Nullable
 	protected abstract String getPropertyAsRawString(String key);
 

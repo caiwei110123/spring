@@ -37,6 +37,12 @@ import org.springframework.lang.Nullable;
  * @author Rob Harrop
  * @since 3.0
  */
+//Placeholder:占位符
+/**
+ * 
+ * @author cw
+ *
+ */
 public class PropertyPlaceholderHelper {
 
 	private static final Log logger = LogFactory.getLog(PropertyPlaceholderHelper.class);
