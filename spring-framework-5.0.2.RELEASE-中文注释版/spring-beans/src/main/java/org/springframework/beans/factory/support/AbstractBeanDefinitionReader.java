@@ -216,7 +216,7 @@ public abstract class AbstractBeanDefinitionReader implements EnvironmentCapable
 			throw new BeanDefinitionStoreException(
 					"Cannot import bean definitions from location [" + location + "]: no ResourceLoader available");
 		}
-
+//ResourcePatternResolver:根据路径得到类的Resource对象
 		if (resourceLoader instanceof ResourcePatternResolver) {
 			// Resource pattern matching available.
 			try {

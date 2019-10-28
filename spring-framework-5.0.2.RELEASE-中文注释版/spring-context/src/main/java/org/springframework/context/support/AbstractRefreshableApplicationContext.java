@@ -124,16 +124,19 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
 	protected final void refreshBeanFactory() throws BeansException {
 		//如果已经有容器，销毁容器中的bean，关闭容器
 		if (hasBeanFactory()) {
+			//其实就是调用一些集合的clear方法，解除对一些实例的引用，参考DefaultSingletonBeanRegistry.destroySingletons方法
 			destroyBeans();
+			//关闭当前的beanFactory，其实就是将成员变量beanFactory设置为null
 			closeBeanFactory();
 		}
 		try {
-			//创建IOC容器
+			//创建IOC容器,返回的是一个DefaultListableBeanFactory实例
 			DefaultListableBeanFactory beanFactory = createBeanFactory();
 			beanFactory.setSerializationId(getId());
 			//对IOC容器进行定制化，如设置启动参数，开启注解的自动装配等
 			customizeBeanFactory(beanFactory);
-			//调用载入Bean定义的方法，主要这里又使用了一个委派模式，在当前类中只定义了抽象的loadBeanDefinitions方法，具体的实现调用子类容器
+			//调用载入Bean定义的方法，主要这里又使用了一个委派模式，在当前类中只定义了抽象的loadBeanDefinitions方法，
+			//具体的实现调用子类容器,作用是把所有bean的定义后保存在context中
 			loadBeanDefinitions(beanFactory);
 			synchronized (this.beanFactoryMonitor) {
 				this.beanFactory = beanFactory;
@@ -226,9 +229,11 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
 	 */
 	protected void customizeBeanFactory(DefaultListableBeanFactory beanFactory) {
 		if (this.allowBeanDefinitionOverriding != null) {
+			//allowBeanDefinitionOverriding表示是否允许注册一个同名的类来覆盖原有类(注意是类，不是实例)
 			beanFactory.setAllowBeanDefinitionOverriding(this.allowBeanDefinitionOverriding);
 		}
 		if (this.allowCircularReferences != null) {
+			//allowCircularReferences表示是否运行多个类之间的循环引用
 			beanFactory.setAllowCircularReferences(this.allowCircularReferences);
 		}
 	}

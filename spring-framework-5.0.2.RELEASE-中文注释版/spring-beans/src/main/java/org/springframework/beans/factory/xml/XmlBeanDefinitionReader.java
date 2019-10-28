@@ -516,6 +516,9 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 		//得到BeanDefinitionDocumentReader来对xml格式的BeanDefinition解析
 		BeanDefinitionDocumentReader documentReader = createBeanDefinitionDocumentReader();
 		//获得容器中注册的Bean数量
+		/**
+		 * DefaultListAbleBeanFactory的beanDefinitionMap的大小
+		 */
 		int countBefore = getRegistry().getBeanDefinitionCount();
 		//解析过程入口，这里使用了委派模式，BeanDefinitionDocumentReader只是个接口,
 		//具体的解析实现过程有实现类DefaultBeanDefinitionDocumentReader完成

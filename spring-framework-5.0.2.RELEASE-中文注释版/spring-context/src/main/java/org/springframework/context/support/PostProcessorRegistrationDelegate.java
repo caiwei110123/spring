@@ -183,14 +183,24 @@ class PostProcessorRegistrationDelegate {
 		beanFactory.clearMetadataCache();
 	}
 
+	/**
+	 * 1. 实现了顺序接口Ordered.class的，先放入orderedPostProcessors集合，排序后顺序加入beanFactory的bean后处理集合中；
+	 * 2. 既没有实现Ordered.class，也没有实现PriorityOrdered.class的后置处理器，也加入到beanFactory的bean后处理集合中；
+	 * 3. 最后是实现了优先级接口PriorityOrdered.class的，排序后顺序加入beanFactory的bean后处理集合中；
+	 * registerBeanPostProcessors方法执行完毕后，beanFactory中已经保存了有序的bean后置处理器，在bean实例化之后，会依次使用这些后置处理器对bean实例来做对应的处理；
+	 * @param beanFactory
+	 * @param applicationContext
+	 */
 	public static void registerBeanPostProcessors(
 			ConfigurableListableBeanFactory beanFactory, AbstractApplicationContext applicationContext) {
 
+		//根据类型获取bean的名称
 		String[] postProcessorNames = beanFactory.getBeanNamesForType(BeanPostProcessor.class, true, false);
 
 		// Register BeanPostProcessorChecker that logs an info message when
 		// a bean is created during BeanPostProcessor instantiation, i.e. when
 		// a bean is not eligible for getting processed by all BeanPostProcessors.
+	//计算Bean后处理器的数量
 		int beanProcessorTargetCount = beanFactory.getBeanPostProcessorCount() + 1 + postProcessorNames.length;
 		beanFactory.addBeanPostProcessor(new BeanPostProcessorChecker(beanFactory, beanProcessorTargetCount));
 
@@ -217,6 +227,7 @@ class PostProcessorRegistrationDelegate {
 		}
 
 		// First, register the BeanPostProcessors that implement PriorityOrdered.
+		//首选注册实现了优先级接口的bean后置处理器
 		sortPostProcessors(priorityOrderedPostProcessors, beanFactory);
 		registerBeanPostProcessors(beanFactory, priorityOrderedPostProcessors);
 

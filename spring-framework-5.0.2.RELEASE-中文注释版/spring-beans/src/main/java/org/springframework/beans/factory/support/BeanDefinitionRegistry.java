@@ -94,6 +94,10 @@ public interface BeanDefinitionRegistry extends AliasRegistry {
 	 * Return the number of beans defined in the registry.
 	 * @return the number of beans defined in the registry
 	 */
+	/**
+	 * 获取beanDefinitionMap的大小
+	 * @return
+	 */
 	int getBeanDefinitionCount();
 
 	/**
