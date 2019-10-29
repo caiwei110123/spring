@@ -36,6 +36,11 @@ import org.springframework.util.StringUtils;
  * @see #setConfigLocations
  * @see #getDefaultConfigLocations
  */
+/**
+ * 负责配置相关应用程序上下文，即：ApplicationContext的一些配置工作，例如location，resolvePath
+ * @author cw
+ *
+ */
 public abstract class AbstractRefreshableConfigApplicationContext extends AbstractRefreshableApplicationContext
 		implements BeanNameAware, InitializingBean {
 

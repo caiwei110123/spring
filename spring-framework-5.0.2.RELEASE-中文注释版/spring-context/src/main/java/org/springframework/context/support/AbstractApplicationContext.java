@@ -122,6 +122,9 @@ import org.springframework.util.ReflectionUtils;
  * @see org.springframework.context.ApplicationListener
  * @see org.springframework.context.MessageSource
  */
+/**
+ * 不是作为配置的存储使用，简单的提供通用的上下文功能，用模板方法涉及模式，需要子类各自实现抽象方法
+ */
 public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		implements ConfigurableApplicationContext {
 
@@ -172,6 +175,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	private ApplicationContext parent;
 
 	/** Environment used by this context */
+	//上下文使用的环境
 	@Nullable
 	private ConfigurableEnvironment environment;
 
@@ -194,7 +198,8 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	@Nullable
 	private Thread shutdownHook;
 
-	/** ResourcePatternResolver used by this context */
+	/** ResourcePatternResolver used by this context  */
+	//资源解析器
 	private ResourcePatternResolver resourcePatternResolver;
 
 	/** LifecycleProcessor for managing the lifecycle of beans within this context */
@@ -522,6 +527,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 			// Prepare this context for refreshing.
 			//调用容器准备刷新的方法，获取容器的当时时间，同时给容器设置同步标识
 		    // 准备工作，例如记录事件，设置标志，检查环境变量等，并有留给子类扩展的位置，用来将属性加入到applicationContext中
+			//容器刷新前的准备，设置上下文状态，获取属性，验证必要的属性等
 			prepareRefresh();
 
 			// Tell the subclass to refresh the internal bean factory.
@@ -576,12 +582,14 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				/**
 				 * 空方法，留给子类自己实现的，在实例化bean之前做一些ApplicationContext相关的操作
 				 */
+				//模板方法，在容器刷新的时候可以自定义逻辑，不同的Spring容器做不同的事情。
 				onRefresh();
 
 				// Check for listener beans and register them.
 				//为事件传播器注册事件监听器.
 				/**
 				 * 注册一部分特殊的事件监听器，剩下的只是准备好名字，留待bean实例化完成后再注册
+				 * 注册监听器，广播early application events
 				 */
 				registerListeners();
 
@@ -589,6 +597,8 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				//初始化所有剩余的单例Bean
 				/**
 				 * 单例模式的bean的实例化、成员变量注入、初始化等工作都在此完成
+				 * 实例化所有剩余的（非懒加载）单例
+				 * 比如invokeBeanFactoryPostProcessors方法中根据各种注解解析出来的类，在这个时候都会被初始化。实例化的过程各种BeanPostProcessor开始起作用。
 				 */
 				finishBeanFactoryInitialization(beanFactory);
 
@@ -629,6 +639,9 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	/**
 	 * Prepare this context for refreshing, setting its startup date and
 	 * active flag as well as performing any initialization of property sources.
+	 */
+	/**
+	 * 容器刷新前的准备，设置上下文状态，获取属性，验证必要的属性等
 	 */
 	protected void prepareRefresh() {
 		//记录初始化开始时间
@@ -846,6 +859,9 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 * Initialize the LifecycleProcessor.
 	 * Uses DefaultLifecycleProcessor if none defined in the context.
 	 * @see org.springframework.context.support.DefaultLifecycleProcessor
+	 */
+	/**
+	 * 初始化bean的生命周期
 	 */
 	protected void initLifecycleProcessor() {
 		ConfigurableListableBeanFactory beanFactory = getBeanFactory();

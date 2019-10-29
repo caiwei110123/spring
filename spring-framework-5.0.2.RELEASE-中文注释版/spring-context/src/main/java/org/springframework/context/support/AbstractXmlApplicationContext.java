@@ -43,6 +43,9 @@ import java.io.IOException;
  * @see #getConfigLocations
  * @see org.springframework.beans.factory.xml.XmlBeanDefinitionReader
  */
+/** 
+ *提供的几个方法主要是用来进行spring注入bean的配置文件进行解析，主要的操作都在父类中 
+ */  
 public abstract class AbstractXmlApplicationContext extends AbstractRefreshableConfigApplicationContext {
 
 	private boolean validating = true;

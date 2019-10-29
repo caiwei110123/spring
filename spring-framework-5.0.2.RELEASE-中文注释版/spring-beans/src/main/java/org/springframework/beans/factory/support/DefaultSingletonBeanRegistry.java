@@ -95,18 +95,19 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 	private final Map<String, Object> disposableBeans = new LinkedHashMap<>();
 
 	/** Map between containing bean names: bean name --> Set of bean names that the bean contains   依赖的bean name为key , 就是依赖类 -> 查找 被依赖的类 */
-	/**
-	 * 指定的bean与目前已经注册的依赖这个指定的bean的所有bean的依赖关系的缓存（我依赖的）
-	 */
+	//内部beanName集合的映射缓存
 	private final Map<String, Set<String>> containedBeanMap = new ConcurrentHashMap<>(16);
 
 	/** Map between dependent bean names: bean name --> Set of dependent bean names  当前Bean被引用的Bean的集合   依赖bean名称集     依赖的原始bean name为key*/
 	/**
-	 * 指定bean与目前已经注册的创建这个bean所需依赖的所有bean的依赖关系的缓存（依赖我的）
+	 * 指定的bean与目前已经注册的依赖这个指定的bean的所有bean的依赖关系的缓存（我依赖的）
 	 */
 	private final Map<String, Set<String>> dependentBeanMap = new ConcurrentHashMap<>(64);
 
 	/** Map between depending bean names: bean name --> Set of bean names for the bean's dependencies 当前Bean所依赖的Bean的集合。   bean依赖项的bean名称集    被依赖的bean name为key  */
+	/**
+	 * 指定bean与目前已经注册的创建这个bean所需依赖的所有bean的依赖关系的缓存（依赖我的）
+	 */
 	private final Map<String, Set<String>> dependenciesForBeanMap = new ConcurrentHashMap<>(64);
 
 
@@ -515,26 +516,36 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 			logger.debug("Destroying singletons in " + this);
 		}
 		synchronized (this.singletonObjects) {
+			// 设置正在销毁的标记为true
 			this.singletonsCurrentlyInDestruction = true;
 		}
 
 		String[] disposableBeanNames;
 		synchronized (this.disposableBeans) {
+			/* 遍历销毁之前注册的所有disposableBean */
 			disposableBeanNames = StringUtils.toStringArray(this.disposableBeans.keySet());
 		}
 		for (int i = disposableBeanNames.length - 1; i >= 0; i--) {
+			 /* 遍历销毁之前注册的所有disposableBean */
 			destroySingleton(disposableBeanNames[i]);
 		}
-
+		 // 清空beanName --> 它包含的所有内部beanName集合的映射缓存
 		this.containedBeanMap.clear();
+		// 清空beanName --> 它依赖的所有beanName集合的映射缓存
 		this.dependentBeanMap.clear();
+		// 清空beanName --> 依赖它的所有beanName集合的映射缓存
 		this.dependenciesForBeanMap.clear();
 
 		synchronized (this.singletonObjects) {
+			 // 清空单例bean缓存
 			this.singletonObjects.clear();
+			  // 清空单例工厂缓存
 			this.singletonFactories.clear();
+			// 清空提前暴露的beanName --> bean的映射缓存
 			this.earlySingletonObjects.clear();
+			 // 清空已经注册的单例bean缓存
 			this.registeredSingletons.clear();
+			 // 设置正在销毁的标记为false
 			this.singletonsCurrentlyInDestruction = false;
 		}
 	}
@@ -547,11 +558,13 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 	 */
 	public void destroySingleton(String beanName) {
 		// Remove a registered singleton of the given name, if any.
+		// 清除bean的相应缓存
 		removeSingleton(beanName);
 
 		// Destroy the corresponding DisposableBean instance.
 		DisposableBean disposableBean;
 		synchronized (this.disposableBeans) {
+			// 移除并获取disposableBean
 			disposableBean = (DisposableBean) this.disposableBeans.remove(beanName);
 		}
 		destroyBean(beanName, disposableBean);
