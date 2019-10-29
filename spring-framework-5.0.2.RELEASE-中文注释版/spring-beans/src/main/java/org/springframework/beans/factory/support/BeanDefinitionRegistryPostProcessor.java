@@ -30,6 +30,11 @@ import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
  * @since 3.0.1
  * @see org.springframework.context.annotation.ConfigurationClassPostProcessor
  */
+/**
+ * 在标准初始化之后修改应用程序上下文的内部bean定义注册表。将加载所有常规bean定义，但是还没有实例化bean。这允许在下一个后处理阶段开始之前添加更多的bean定义。
+ * @author cw
+ *
+ */
 public interface BeanDefinitionRegistryPostProcessor extends BeanFactoryPostProcessor {
 
 	/**

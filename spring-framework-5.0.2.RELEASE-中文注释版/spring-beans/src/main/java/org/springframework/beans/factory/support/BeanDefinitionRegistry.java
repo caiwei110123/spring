@@ -45,6 +45,11 @@ import org.springframework.core.AliasRegistry;
  * @see org.springframework.beans.factory.xml.XmlBeanDefinitionReader
  * @see PropertiesBeanDefinitionReader
  */
+/**
+ * BeanDefinitionRegistry ，该类的作用主要是向注册表中注册 BeanDefinition 实例，完成 注册的过程。
+ * @author cw
+ *
+ */
 public interface BeanDefinitionRegistry extends AliasRegistry {
 
 	/**
@@ -58,6 +63,7 @@ public interface BeanDefinitionRegistry extends AliasRegistry {
 	 * @see RootBeanDefinition
 	 * @see ChildBeanDefinition
 	 */
+	//// 关键 -> 往注册表中注册一个新的 BeanDefinition 实例 
 	void registerBeanDefinition(String beanName, BeanDefinition beanDefinition)
 			throws BeanDefinitionStoreException;
 
@@ -66,6 +72,7 @@ public interface BeanDefinitionRegistry extends AliasRegistry {
 	 * @param beanName the name of the bean instance to register
 	 * @throws NoSuchBeanDefinitionException if there is no such bean definition
 	 */
+	// 移除注册表中已注册的 BeanDefinition 实例
 	void removeBeanDefinition(String beanName) throws NoSuchBeanDefinitionException;
 
 	/**
@@ -74,6 +81,7 @@ public interface BeanDefinitionRegistry extends AliasRegistry {
 	 * @return the BeanDefinition for the given name (never {@code null})
 	 * @throws NoSuchBeanDefinitionException if there is no such bean definition
 	 */
+	// 从注册中取得指定的 BeanDefinition 实例
 	BeanDefinition getBeanDefinition(String beanName) throws NoSuchBeanDefinitionException;
 
 	/**
