@@ -101,10 +101,14 @@ class ConfigBeanDefinitionParser implements BeanDefinitionParser {
 	public BeanDefinition parse(Element element, ParserContext parserContext) {
 		CompositeComponentDefinition compositeDef =
 				new CompositeComponentDefinition(element.getTagName(), parserContext.extractSource(element));
+		//把创建的复合componet放入栈中
 		parserContext.pushContainingComponent(compositeDef);
-
+		// 注册，嵌入到复合component/
+	/**
+	 * 创建、设置属性、注册。
+	 */
 		configureAutoProxyCreator(parserContext, element);
-
+		// 解析子元素
 		List<Element> childElts = DomUtils.getChildElements(element);
 		for (Element elt: childElts) {
 			String localName = parserContext.getDelegate().getLocalName(elt);
@@ -115,10 +119,11 @@ class ConfigBeanDefinitionParser implements BeanDefinitionParser {
 				parseAdvisor(elt, parserContext);
 			}
 			else if (ASPECT.equals(localName)) {
+				//解析aspect标签
 				parseAspect(elt, parserContext);
 			}
 		}
-
+		//注册整个复合component
 		parserContext.popAndRegisterContainingComponent();
 		return null;
 	}
@@ -214,6 +219,7 @@ class ConfigBeanDefinitionParser implements BeanDefinitionParser {
 			// ordering semantics right.
 			NodeList nodeList = aspectElement.getChildNodes();
 			boolean adviceFoundAlready = false;
+			//循环先对advice型节点进行处理
 			for (int i = 0; i < nodeList.getLength(); i++) {
 				Node node = nodeList.item(i);
 				if (isAdviceNode(node, parserContext)) {
@@ -225,18 +231,21 @@ class ConfigBeanDefinitionParser implements BeanDefinitionParser {
 									aspectElement, this.parseState.snapshot());
 							return;
 						}
+						//第一次会获取依赖的aspect对象名称
 						beanReferences.add(new RuntimeBeanReference(aspectName));
 					}
+					//创建advisor的BeanDefinition
 					AbstractBeanDefinition advisorDefinition = parseAdvice(
 							aspectName, i, aspectElement, (Element) node, parserContext, beanDefinitions, beanReferences);
 					beanDefinitions.add(advisorDefinition);
 				}
 			}
-
+			//把上面的aspect生成的beanDefinitions一起生成组件，然后压入栈中
 			AspectComponentDefinition aspectComponentDefinition = createAspectComponentDefinition(
 					aspectElement, aspectId, beanDefinitions, beanReferences, parserContext);
+			//压栈
 			parserContext.pushContainingComponent(aspectComponentDefinition);
-
+			//最后操作pointcut节点
 			List<Element> pointcuts = DomUtils.getChildElementsByTagName(aspectElement, POINTCUT);
 			for (Element pointcutElement : pointcuts) {
 				parsePointcut(pointcutElement, parserContext);

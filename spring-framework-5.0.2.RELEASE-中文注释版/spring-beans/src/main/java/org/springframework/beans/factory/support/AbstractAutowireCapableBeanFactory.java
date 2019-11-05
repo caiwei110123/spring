@@ -435,7 +435,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 	}
 
 	@Override
-	//调用BeanPostProcessor后置处理器实例对象初始化之后的处理方法
+	//调用BeanPostProcessor后置处理器实例对象初始化之后的处理方法 
 	public Object applyBeanPostProcessorsAfterInitialization(Object existingBean, String beanName)
 			throws BeansException {
 
@@ -513,6 +513,11 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 			// 给BeanPostProcessors 一个机会来返回代理对象来代替真正的实例，在这里实现创建代理对象功能
 			/**
 			 * 做些前置处理，并且如果在这个方法中返回了bean的话（AOP代理对象或者自定义对象），就直接返回这个bean，不再继续后面的创建步骤
+			 * 
+			 * 1.如果postProcessBeforeInstantiation方法返回了Object是null;那么就直接返回，调用doCreateBean方法();
+			 * 2.如果postProcessBeforeInstantiation返回不为null;说明修改了bean对象;然后这个时候就立马执行postProcessAfterInitialization方法(注意这个是初始化之后的方法,也就是通过这个方法实例化了之后，直接执行初始化之后的方法;中间的实例化之后 和 初始化之前都不执行);
+			 * 3.在调用postProcessAfterInitialization方法时候如果返回null;那么就直接返回，调用doCreateBean方法();(初始化之后的方法返回了null,那就需要调用doCreateBean生成对象了)
+			 * 4.在调用postProcessAfterInitialization时返回不为null;那这个bean就直接返回给ioc容器了 初始化之后的操作 是这里面最后一个方法了；
 			 */
 			Object bean = resolveBeforeInstantiation(beanName, mbdToUse);
 			if (bean != null) {
@@ -574,6 +579,11 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 			instanceWrapper = this.factoryBeanInstanceCache.remove(beanName);
 		}
 		if (instanceWrapper == null) {
+			/**
+			 * Bean的生命周期中有实例化和初始化两个阶段：【此处是实例化】
+			 * 1、实例化----实例化的过程是一个创建Bean的过程，即调用Bean的构造函数，单例的Bean放入单例池中
+			 * 2、初始化----初始化的过程是一个赋值的过程，即调用Bean的setter，设置Bean的属性
+			 */
 			instanceWrapper = createBeanInstance(beanName, mbd, args);
 		}
 		final Object bean = instanceWrapper.getWrappedInstance();
@@ -625,6 +635,11 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 			//将Bean实例对象封装，并且Bean定义中配置的属性值赋值给实例对象
 			populateBean(beanName, mbd, instanceWrapper);
 			//初始化Bean对象，//调用初始化方法，比如init-method、注入Aware对象、应用后处理器
+			/**
+			 * Bean的生命周期中有实例化和初始化两个阶段：【此处是初始化】
+			 * 1、实例化----实例化的过程是一个创建Bean的过程，即调用Bean的构造函数，单例的Bean放入单例池中
+			 * 2、初始化----初始化的过程是一个赋值的过程，即调用Bean的setter，设置Bean的属性
+			 */
 			exposedObject = initializeBean(beanName, exposedObject, mbd);
 		}
 		catch (Throwable ex) {
@@ -1841,6 +1856,9 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		//对BeanPostProcessor后置处理器的postProcessBeforeInitialization
 		//回调方法的调用，为Bean实例初始化前做一些处理
 		if (mbd == null || !mbd.isSynthetic()) {
+			/**
+			 * 
+			 */
 			wrappedBean = applyBeanPostProcessorsBeforeInitialization(wrappedBean, beanName);
 		}
 

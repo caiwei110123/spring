@@ -934,7 +934,10 @@ public class DispatcherServlet extends FrameworkServlet {
 	 * @param response current HTTP response
 	 * @throws Exception in case of any kind of processing failure
 	 */
-	/** 中央控制器,控制请求的转发 **/
+	/** 
+	 * 中央控制器,控制请求的转发 
+	 * 
+	 **/
 	protected void doDispatch(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpServletRequest processedRequest = request;
 		HandlerExecutionChain mappedHandler = null;

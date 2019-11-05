@@ -37,6 +37,7 @@ import org.springframework.lang.Nullable;
  * @see XmlReaderContext
  * @see BeanDefinitionParserDelegate
  */
+//有个栈用于存放复合组件
 public final class ParserContext {
 
 	private final XmlReaderContext readerContext;

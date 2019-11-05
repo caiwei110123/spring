@@ -58,6 +58,7 @@ import org.springframework.util.StringValueResolver;
  * @see org.springframework.context.ApplicationContextAware
  * @see org.springframework.context.support.AbstractApplicationContext#refresh()
  */
+//注意，这里class前没有public修饰符，表明这个工具Spring没有打算给外部使用。
 class ApplicationContextAwareProcessor implements BeanPostProcessor {
 
 	private final ConfigurableApplicationContext applicationContext;
@@ -67,6 +68,9 @@ class ApplicationContextAwareProcessor implements BeanPostProcessor {
 
 	/**
 	 * Create a new ApplicationContextAwareProcessor for the given context.
+	 * 使用给定的应用上下文创建一个ApplicationContextAwareProcessor实例，通常该方法
+	 * 由应用上下文对象自己调用，比如在类AbstractApplicationContext中 : 
+	 * new ApplicationContextAwareProcessor(this)
 	 */
 	public ApplicationContextAwareProcessor(ConfigurableApplicationContext applicationContext) {
 		this.applicationContext = applicationContext;
@@ -74,6 +78,7 @@ class ApplicationContextAwareProcessor implements BeanPostProcessor {
 	}
 
 
+	// 接口BeanPostProcessor规定的方法，会在bean创建时，实例化后，初始化前，对bean对象应用
 	@Override
 	@Nullable
 	public Object postProcessBeforeInitialization(final Object bean, String beanName) throws BeansException {
@@ -98,7 +103,7 @@ class ApplicationContextAwareProcessor implements BeanPostProcessor {
 
 		return bean;
 	}
-
+	// 检查bean上是否实现了某个Aware接口，有的话做相应调用
 	private void invokeAwareInterfaces(Object bean) {
 		if (bean instanceof Aware) {
 			if (bean instanceof EnvironmentAware) {
