@@ -38,7 +38,7 @@ import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.aop.framework.ProxyProcessorSupport;
 import org.springframework.aop.framework.adapter.AdvisorAdapterRegistry;
 import org.springframework.aop.framework.adapter.GlobalAdvisorAdapterRegistry;
-import org.springframework.aop.target.SingletonTargetSource;
+import org.springframework.aop.target_aop.SingletonTargetSource;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.PropertyValues;
 import org.springframework.beans.factory.BeanFactory;
@@ -78,7 +78,7 @@ import org.springframework.util.StringUtils;
  * a custom target source: for example, to pool prototype objects. Auto-proxying will
  * occur even if there is no advice, as long as a TargetSourceCreator specifies a custom
  * {@link org.springframework.aop.TargetSource}. If there are no TargetSourceCreators set,
- * or if none matches, a {@link org.springframework.aop.target.SingletonTargetSource}
+ * or if none matches, a {@link org.springframework.aop.target_aop.SingletonTargetSource}
  * will be used by default to wrap the target bean instance.
  *
  * @author Juergen Hoeller
@@ -310,7 +310,9 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 	@Override
 	public Object postProcessAfterInitialization(@Nullable Object bean, String beanName) throws BeansException {
 		if (bean != null) {
+			//根据给定的bean的class和name构造出个key，beanClassName_beanName
 			Object cacheKey = getCacheKey(bean.getClass(), beanName);
+			//如果不是因为循环依赖而创建的代理
 			if (!this.earlyProxyReferences.contains(cacheKey)) {
 				//如果没有被代理过则代理
 				return wrapIfNecessary(bean, beanName, cacheKey);
@@ -347,6 +349,14 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 	 * @param beanName the name of the bean
 	 * @param cacheKey the cache key for metadata access
 	 * @return a proxy wrapping the bean, or the raw bean instance as-is
+	 */
+	/**
+	 * 1.找出制定的bean对应的增强器
+	 * 2.根据找出的增强器创建代理
+	 * @param bean
+	 * @param beanName
+	 * @param cacheKey
+	 * @return
 	 */
 	protected Object wrapIfNecessary(Object bean, String beanName, Object cacheKey) {
 		if (StringUtils.hasLength(beanName) && this.targetSourcedBeans.contains(beanName)) {

@@ -19,7 +19,7 @@ package org.springframework.aop.framework;
 import org.springframework.aop.TargetSource;
 import org.springframework.aop.framework.adapter.AdvisorAdapterRegistry;
 import org.springframework.aop.framework.adapter.GlobalAdvisorAdapterRegistry;
-import org.springframework.aop.target.SingletonTargetSource;
+import org.springframework.aop.target_aop.SingletonTargetSource;
 import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.FactoryBeanNotInitializedException;
@@ -70,10 +70,10 @@ public abstract class AbstractSingletonProxyFactoryBean extends ProxyConfig
 	 * be created. If it is a TargetSource, no wrapper TargetSource is created:
 	 * This enables the use of a pooling or prototype TargetSource etc.
 	 * @see org.springframework.aop.TargetSource
-	 * @see org.springframework.aop.target.SingletonTargetSource
-	 * @see org.springframework.aop.target.LazyInitTargetSource
-	 * @see org.springframework.aop.target.PrototypeTargetSource
-	 * @see org.springframework.aop.target.CommonsPool2TargetSource
+	 * @see org.springframework.aop.target_aop.SingletonTargetSource
+	 * @see org.springframework.aop.target_aop.LazyInitTargetSource
+	 * @see org.springframework.aop.target_aop.PrototypeTargetSource
+	 * @see org.springframework.aop.target_aop.CommonsPool2TargetSource
 	 */
 	public void setTarget(Object target) {
 		this.target = target;

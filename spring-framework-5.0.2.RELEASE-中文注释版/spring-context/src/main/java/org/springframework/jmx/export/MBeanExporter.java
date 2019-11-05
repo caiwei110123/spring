@@ -41,7 +41,7 @@ import javax.management.modelmbean.RequiredModelMBean;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.aop.scope.ScopedProxyUtils;
 import org.springframework.aop.support.AopUtils;
-import org.springframework.aop.target.LazyInitTargetSource;
+import org.springframework.aop.target_aop.LazyInitTargetSource;
 import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;

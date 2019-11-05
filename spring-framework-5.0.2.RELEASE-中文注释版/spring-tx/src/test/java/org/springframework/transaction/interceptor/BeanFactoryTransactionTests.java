@@ -27,7 +27,7 @@ import org.junit.Test;
 
 import org.springframework.aop.support.AopUtils;
 import org.springframework.aop.support.StaticMethodMatcherPointcut;
-import org.springframework.aop.target.HotSwappableTargetSource;
+import org.springframework.aop.target_aop.HotSwappableTargetSource;
 import org.springframework.beans.FatalBeanException;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;

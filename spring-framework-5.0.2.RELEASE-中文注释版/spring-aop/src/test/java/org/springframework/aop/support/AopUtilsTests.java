@@ -24,7 +24,7 @@ import org.springframework.aop.ClassFilter;
 import org.springframework.aop.MethodMatcher;
 import org.springframework.aop.Pointcut;
 import org.springframework.aop.interceptor.ExposeInvocationInterceptor;
-import org.springframework.aop.target.EmptyTargetSource;
+import org.springframework.aop.target_aop.EmptyTargetSource;
 import org.springframework.lang.Nullable;
 import org.springframework.tests.aop.interceptor.NopInterceptor;
 import org.springframework.tests.sample.beans.TestBean;
