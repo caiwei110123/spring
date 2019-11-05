@@ -249,9 +249,11 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 
 		if (!StringUtils.hasLength(beanName) || !this.targetSourcedBeans.contains(beanName)) {
 			if (this.advisedBeans.containsKey(cacheKey)) {
+				//如果已经存在直接返回
 				return null;
 			}
 			if (isInfrastructureClass(beanClass) || shouldSkip(beanClass, beanName)) {
+				//添加进advisedBeans ConcurrentHashMap<k=Object,v=Boolean>标记是否需要增强实现，这里基础构建bean不需要代理，都置为false，供后面postProcessAfterInitialization实例化后使用。
 				this.advisedBeans.put(cacheKey, Boolean.FALSE);
 				return null;
 			}
@@ -338,26 +340,35 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 	 */
 	protected Object wrapIfNecessary(Object bean, String beanName, Object cacheKey) {
 		if (StringUtils.hasLength(beanName) && this.targetSourcedBeans.contains(beanName)) {
+			 // 如果是用户自定义获取实例，不需要增强处理，直接返回
 			return bean;
 		}
 		if (Boolean.FALSE.equals(this.advisedBeans.get(cacheKey))) {
+			// 查询map缓存，标记过false,不需要增强直接返回
 			return bean;
 		}
+		// 判断一遍springAOP基础构建类，标记过false,不需要增强直接返回
+		 // 所谓 InfrastructureClass 就是指 Advice/PointCut/Advisor 等接口的实现类。 
+		//shouldSkip 默认实现为返回 false,由于是 protected 方法，子类可以覆盖
 		if (isInfrastructureClass(bean.getClass()) || shouldSkip(bean.getClass(), beanName)) {
 			this.advisedBeans.put(cacheKey, Boolean.FALSE);
 			return bean;
 		}
 
 		// Create proxy if we have advice.
+		// 获取增强List<Advisor> advisors，获取这个 bean 的 advice
 		Object[] specificInterceptors = getAdvicesAndAdvisorsForBean(bean.getClass(), beanName, null);
+		 // 如果存在增强
 		if (specificInterceptors != DO_NOT_PROXY) {
+			// 标记增强为TRUE,表示需要增强实现
 			this.advisedBeans.put(cacheKey, Boolean.TRUE);
+			  // 生成增强代理类
 			Object proxy = createProxy(
 					bean.getClass(), beanName, specificInterceptors, new SingletonTargetSource(bean));
 			this.proxyTypes.put(cacheKey, proxy.getClass());
 			return proxy;
 		}
-
+		 // 如果不存在增强，标记false,作为缓存，再次进入提高效率， eg:	if (Boolean.FALSE.equals(this.advisedBeans.get(cacheKey))) {
 		this.advisedBeans.put(cacheKey, Boolean.FALSE);
 		return bean;
 	}

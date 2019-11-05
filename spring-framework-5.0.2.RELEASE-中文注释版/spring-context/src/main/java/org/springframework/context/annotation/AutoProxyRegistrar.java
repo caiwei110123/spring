@@ -35,6 +35,12 @@ import org.springframework.core.type.AnnotationMetadata;
  * @since 3.1
  * @see EnableAspectJAutoProxy
  */
+/**
+ * 给容器中注册一个 InfrastructureAdvisorAutoProxyCreator 组件;
+ * 利用后置处理器机制在对象创建以后，包装对象，返回一个代理对象（增强器），代理对象执行方法利用拦截器链进行调用；
+ * @author cw
+ *
+ */
 public class AutoProxyRegistrar implements ImportBeanDefinitionRegistrar {
 
 	private final Log logger = LogFactory.getLog(getClass());
@@ -69,8 +75,10 @@ public class AutoProxyRegistrar implements ImportBeanDefinitionRegistrar {
 					Boolean.class == proxyTargetClass.getClass()) {
 				candidateFound = true;
 				if (mode == AdviceMode.PROXY) {
+					//代理模式
 					AopConfigUtils.registerAutoProxyCreatorIfNecessary(registry);
 					if ((Boolean) proxyTargetClass) {
+						//如果是CGLOB子类代理模式
 						AopConfigUtils.forceAutoProxyCreatorToUseClassProxying(registry);
 						return;
 					}

@@ -21,6 +21,9 @@ public class Test {
         HelloWorld hw1 = (HelloWorld) appCtx.getBean("proxy");
         HelloWorld hw2 = (HelloWorld) appCtx.getBean("proxy2");
         hw1.printHelloWorld();
+        hw2.printHelloWorld();
+
+        System.out.println("=====================");
         System.out.println();
         ParamObj paramObj = new ParamObj();
         paramObj.setActionName("test");

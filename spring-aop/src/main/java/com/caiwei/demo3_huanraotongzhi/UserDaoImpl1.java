@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 @Component
-public class UserDaoImpl implements IUserDao   {
+public class UserDaoImpl1 implements IUserDao   {
 
 	@Autowired
 	Commonmap commonmap;
@@ -21,10 +21,11 @@ public class UserDaoImpl implements IUserDao   {
 	 */
 	public String save(String name)
 	{
-		commonmap.set("a-1","a-1");
+
 		System.out.println(commonmap.getMap());
-		System.out.println("=====UserDaoImpl  add 完成");
-		System.out.println("这是保存方法!");
+		System.out.println("UserDaoImpl1  获取 map");
+		commonmap.set("a2","a2");
+		System.out.println("这是保存方法!-1");
 		return "save";
 	}
 	/* (non-Javadoc)

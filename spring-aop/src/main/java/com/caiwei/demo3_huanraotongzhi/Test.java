@@ -21,6 +21,9 @@ public class Test {
 		ApplicationContext applicationContext = new AnnotationConfigApplicationContext(UserDaoAnimalConfig.class);
 
 		IUserDao dao = applicationContext.getBean("userDaoImpl", UserDaoImpl.class);
+		IUserDao dao1 = applicationContext.getBean("userDaoImpl1", UserDaoImpl1.class);
+		dao.save("123");
+		dao1.save("");
 		dao.save("123");
 	}
 

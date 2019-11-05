@@ -45,6 +45,11 @@ import org.springframework.core.type.AnnotationMetadata;
  * @see ImportBeanDefinitionRegistrar
  * @see Configuration
  */
+/**
+ * 导入需要加载的类
+ * @author cw
+ *
+ */
 public interface ImportSelector {
 
 	/**

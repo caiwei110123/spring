@@ -34,6 +34,7 @@ import org.springframework.transaction.interceptor.TransactionInterceptor;
  * @see EnableTransactionManagement
  * @see TransactionManagementConfigurationSelector
  */
+//就是一个配置类，定义了事务增强器。
 @Configuration
 public class ProxyTransactionManagementConfiguration extends AbstractTransactionManagementConfiguration {
 
