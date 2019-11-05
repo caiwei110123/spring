@@ -36,7 +36,7 @@ import java.io.Flushable;
  * @see org.springframework.transaction.support.TransactionCallback#doInTransaction
  * @see org.springframework.transaction.interceptor.TransactionInterceptor#currentTransactionStatus()
  */
-//事物状态描述
+//事物状态描述m,事务状态，下文简称TxStatus
 public interface TransactionStatus extends SavepointManager, Flushable {
 
 	/**

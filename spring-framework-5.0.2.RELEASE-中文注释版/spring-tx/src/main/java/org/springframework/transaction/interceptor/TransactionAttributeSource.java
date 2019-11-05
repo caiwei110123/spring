@@ -32,6 +32,7 @@ import org.springframework.lang.Nullable;
  * @see TransactionProxyFactoryBean#setTransactionAttributeSource
  * @see org.springframework.transaction.annotation.AnnotationTransactionAttributeSource
  */
+//
 public interface TransactionAttributeSource {
 
 	/**

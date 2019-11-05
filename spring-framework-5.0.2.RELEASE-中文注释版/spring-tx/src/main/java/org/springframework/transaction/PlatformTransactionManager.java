@@ -44,7 +44,7 @@ import org.springframework.lang.Nullable;
  * @see org.springframework.transaction.interceptor.TransactionProxyFactoryBean
  */
 /**
- * Spring事务基础结构中的中心接口
+ * Spring事务基础结构中的中心接口，事务管理器，管理事务的各生命周期方法，下文简称TxMgr
  * @author cw
  *
  */

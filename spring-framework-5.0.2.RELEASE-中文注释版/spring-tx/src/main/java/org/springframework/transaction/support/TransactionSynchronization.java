@@ -35,6 +35,11 @@ import java.io.Flushable;
  * @see AbstractPlatformTransactionManager
  * @see org.springframework.jdbc.datasource.DataSourceUtils#CONNECTION_SYNCHRONIZATION_ORDER
  */
+/**
+ * 事务同步回调，内含多个钩子方法，下文简称TxSync / transaction synchronization
+ * @author cw
+ *
+ */
 public interface TransactionSynchronization extends Flushable {
 
 	/** Completion status in case of proper commit */
