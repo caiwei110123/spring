@@ -598,7 +598,6 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				/**
 				 * 单例模式的bean的实例化、成员变量注入、初始化等工作都在此完成
 				 * 实例化所有剩余的（非懒加载）单例
-				 * 比如invokeBeanFactoryPostProcessors方法中根据各种注解解析出来的类，在这个时候都会被初始化。实例化的过程各种BeanPostProcessor开始起作用。
 				 */
 				finishBeanFactoryInitialization(beanFactory);
 
