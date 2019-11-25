@@ -14,8 +14,7 @@
     </select>
 
     <insert id="insert" parameterType="com.example.entity.User">
-        insert into User (id, userName, passWord,realName,
-        sex)
+        insert into User (id, userName, passWord,realName)
         values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{passWord,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR})
     </insert>
 
