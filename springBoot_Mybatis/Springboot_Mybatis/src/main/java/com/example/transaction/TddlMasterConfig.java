@@ -1,12 +1,15 @@
 package com.example.transaction;
 
 import org.aopalliance.intercept.MethodInvocation;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.mybatis.spring.annotation.MapperScan;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.aop.framework.autoproxy.InfrastructureAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Role;
@@ -15,9 +18,10 @@ import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.annotation.Order;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.AnnotationTransactionAttributeSource;
 import org.springframework.transaction.annotation.SpringTransactionAnnotationParser;
@@ -30,57 +34,58 @@ import org.springframework.transaction.interceptor.TransactionAttributeSource;
 import org.springframework.transaction.interceptor.TransactionInterceptor;
 import org.springframework.util.CollectionUtils;
 
-import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.lang.reflect.AnnotatedElement;
 import java.util.Collection;
 
 /**
- * 功能描述：
- *
- * @author : yilie
- * @date : 2019/11/26  上午1:13
- * @Version 1.0
+ * @author QianMo
+ * @date 2018/11/05.
  */
-@Service
-public class CustomizeTransaction {
+//@Configuration
+public class TddlMasterConfig {
 
+    @Bean(name = "sqlSessionFactoryBean")
+    public SqlSessionFactory sqlSessionFactory(@Qualifier("dataSource") DataSource dataSource) throws Exception {
+        SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
+        bean.setDataSource(dataSource);
+        Resource[] mastResources =
+            new PathMatchingResourcePatternResolver().getResources("classpath*:/mapping/*.xml");
+        bean.setMapperLocations(mastResources);
+        return bean.getObject();
+    }
 
     @Bean
     public SqlSessionFactoryBean sqlSessionFactoryBean() {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-        sqlSessionFactoryBean.setDataSource(ContextUtils.getBean(DataSource.class));
+        sqlSessionFactoryBean.setDataSource(dataSource());
         return sqlSessionFactoryBean;
     }
 
     @Bean
     public MapperScannerConfigurer mapperScannerConfigurer() {
         MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
-        mapperScannerConfigurer.setBasePackage("com.example");
+        mapperScannerConfigurer.setBasePackage("com.example.mapper");
         return mapperScannerConfigurer;
     }
 
     @Bean
     public DataSource dataSource() {
 
-        //DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
-        //driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        //driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/smartEngine?useUnicode=true&characterEncoding=UTF-8");
-        //driverManagerDataSource.setPassword("cai000wei");
-        //driverManagerDataSource.setUsername("root");
-        return ContextUtils.getBean(DataSource.class);
-
-        //EmbeddedDatabaseBuilder embeddedDatabaseBuilder = new EmbeddedDatabaseBuilder();
-        //return embeddedDatabaseBuilder.setType(EmbeddedDatabaseType.H2).build();
+        DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
+        driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
+        driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/springboot?useUnicode=true&characterEncoding=UTF-8");
+        driverManagerDataSource.setPassword("cai000wei");
+        driverManagerDataSource.setUsername("root");
+        return driverManagerDataSource;
     }
 
     @Bean(name = "transactionManager")
     public PlatformTransactionManager transactionManager() {
         DataSourceTransactionManager transactionManager = new DataSourceTransactionManager();
-        transactionManager.setDataSource(ContextUtils.getBean(DataSource.class));
+        transactionManager.setDataSource(dataSource());
         return transactionManager;
     }
-
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public InfrastructureAdvisorAutoProxyCreator advisorAutoProxyCreator() {
@@ -93,7 +98,9 @@ public class CustomizeTransaction {
         public TransactionAttribute parseTransactionAnnotation(AnnotatedElement ae) {
             AnnotationAttributes attributes = AnnotatedElementUtils
                 .getMergedAnnotationAttributes(ae, MyTransactional.class);
+          //  System.out.println(ae.toString());
             if (attributes != null) {
+                System.out.println("-----1------");
                 return parseTransactionAnnotation(attributes);
             } else {
                 return null;
@@ -135,7 +142,7 @@ public class CustomizeTransaction {
         @Bean
         @Role(BeanDefinition.ROLE_INFRASTRUCTURE)
         public TransactionAttributeSource transactionAttributeSource() {
-            return new AnnotationTransactionAttributeSource(new MySpringTransactionAnnotationParser());
+            return new AnnotationTransactionAttributeSource(new TddlMasterConfig.MySpringTransactionAnnotationParser());
         }
 
         @Bean(name = TransactionManagementConfigUtils.TRANSACTIONAL_EVENT_LISTENER_FACTORY_BEAN_NAME)
@@ -159,7 +166,7 @@ public class CustomizeTransaction {
         @Bean
         @Role(BeanDefinition.ROLE_INFRASTRUCTURE)
         public TransactionInterceptor transactionInterceptor() {
-            TransactionInterceptor interceptor = new MyTransactionInterceptor();
+            TransactionInterceptor interceptor = new TddlMasterConfig.MyTransactionInterceptor();
             interceptor.setTransactionAttributeSource(transactionAttributeSource());
             if (this.txManager != null) {
                 interceptor.setTransactionManager(this.txManager);

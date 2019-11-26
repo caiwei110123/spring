@@ -1,6 +1,7 @@
 package com.example.mapper;
 
 import com.example.entity.User;
+import com.example.transaction.MyTransactional;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
@@ -12,7 +13,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserMapper {
 
+    @MyTransactional
     User Sel(int id);
 
+    @MyTransactional
     int insert(User user);
 }
