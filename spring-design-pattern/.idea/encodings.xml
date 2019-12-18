@@ -4,6 +4,30 @@
     <file url="file://$PROJECT_DIR$/src/main/java/pattern/adapter/code/Target.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/pattern/composite/code/Component.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/pattern/composite/code/Composite.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/factory/abs/demo1/Human.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/factory/abs/demo1/HumanEnum.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/factory/abs/demo1/HumanFactory.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/factory/abs/demo1/NvWa.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/factory/abs/demo1/abcfactory/AbstractHumanFactory.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/factory/abs/demo1/factory/FemaleHumanFactory.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/factory/abs/demo1/factory/MaleHumanFactory.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/factory/abs/demo1/product/BlackHuman.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/factory/abs/demo1/product/WhiteHuman.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/factory/abs/demo1/product/YellowHuman.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/factory/abs/demo1/productcluster/BlackFemaleHuman.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/factory/abs/demo1/productcluster/BlackMaleHuman.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/factory/abs/demo1/productcluster/WhiteFemaleHuman.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/factory/abs/demo1/productcluster/WhiteMaleHuman.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/factory/abs/demo1/productcluster/YellowFemaleHuman.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/factory/abs/demo1/productcluster/YellowMaleHuman.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/factory/simple/demo1/BlackHuman.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/factory/simple/demo1/Human.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/factory/simple/demo1/HumanFactory.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/factory/simple/demo1/HumanFactory1.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/factory/simple/demo1/NvWa.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/factory/simple/demo1/NvWa1.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/factory/simple/demo1/WhiteHuman.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/factory/simple/demo1/YellowHuman.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/pattern/memento/CareTaker.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/pattern/memento/Memento.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/pattern/memento/Originator.java" charset="GBK" />
@@ -14,7 +38,6 @@
     <file url="file://$PROJECT_DIR$/src/main/java/pattern/observer/code/ConcreteSubject.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/pattern/observer/code/Observer.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/pattern/observer/code/Subject.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/main/java/pattern/observer/code/code1/ConcreteObserver.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/pattern/observer/code/test.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/pattern/observer/code1/observer/AbsObserver.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/pattern/observer/code1/observer/NBAObserver.java" charset="GBK" />
@@ -27,17 +50,13 @@
     <file url="file://$PROJECT_DIR$/src/main/java/pattern/observer/mouse/Mouse.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/pattern/observer/mouse/MouseEventCallback.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/pattern/observer/mouse/MouseEventType.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/main/java/pattern/observer/mouse/MouseTest.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/pattern/observer/mouse/MouseTest.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/pattern/observer/mouse/ddd.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/pattern/observer/subject/Observer.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/pattern/observer/subject/ObserverTest.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/pattern/observer/subject/Subject.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/main/java/装饰模式/code/code1/Component.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/main/java/装饰模式/code/code1/ConcreteCompnent.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/main/java/装饰模式/code/code1/ConcreteCompnentA.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/main/java/装饰模式/code/code1/ConcreteCompnentB.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/main/java/装饰模式/code/code1/Decorator.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/main/java/装饰模式/code/code1/Test.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/template/demo/Clienter.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/template/demo/HouseOne.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/template/demo/HouseTemplate.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/template/demo/HouseTwo.java" charset="GBK" />
   </component>
 </project>

@@ -1,6 +1,7 @@
 package pattern.strategy.pay;
 
 import pattern.strategy.pay.payport.PayType;
+import pattern.strategy.pay.payport.Payment;
 
 /**
  * Created by Tom on 2018/3/11.
@@ -23,7 +24,9 @@ public class Order {
     //完美地解决了switch的过程，不需要在代码逻辑中写switch了
     //更不需要写if    else if
     public PayState pay(PayType payType){
-        return payType.get().pay(this.uid,this.amount);
+        Payment payment = payType.get();
+        PayState payState = payment.pay(this.uid,this.amount);
+        return payState;
     }
 
 }

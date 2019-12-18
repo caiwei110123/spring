@@ -22,7 +22,8 @@ public class PayStrategyTest {
         //基本算法固定的
 
         //这个值是在支付的时候才决定用哪个值
-        System.out.println(order.pay(PayType.WECHAT_PAY));
+        PayState payState = order.pay(PayType.WECHAT_PAY);
+        System.out.println(payState);
 
         //BeanFactory
 
