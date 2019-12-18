@@ -7,7 +7,6 @@ package pattern.factory.abs.demo1;
  * @date : 2019/12/18  下午7:17
  * @Version 1.0
  */
-
 /**
  * @Description:
  * 这次定一个接口，应该要造不同性别的人，需要不同的生产线
