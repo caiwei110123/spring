@@ -18,11 +18,10 @@ public class Order {
     }
 
 
-    //è¿™ä¸ªå‚æ•°ï¼Œå®Œå…¨å¯ä»¥ç”¨Paymentè¿™ä¸ªæ¥å£æ¥ä»£æ›¿
-    //ä¸ºä»€ä¹ˆï¼Ÿ
-
-    //å®Œç¾åœ°è§£å†³äº†switchçš„è¿‡ç¨‹ï¼Œä¸éœ€è¦åœ¨ä»£ç é€»è¾‘ä¸­å†™switchäº†
-    //æ›´ä¸éœ€è¦å†™if    else if
+    //Õâ¸ö²ÎÊı£¬ÍêÈ«¿ÉÒÔÓÃPaymentÕâ¸ö½Ó¿ÚÀ´´úÌæ
+    //ÎªÊ²Ã´£¿
+    //ÍêÃÀµØ½â¾öÁËswitchµÄ¹ı³Ì£¬²»ĞèÒªÔÚ´úÂëÂß¼­ÖĞĞ´switchÁË
+    //¸ü²»ĞèÒªĞ´if    else if
     public PayState pay(PayType payType){
         Payment payment = payType.get();
         PayState payState = payment.pay(this.uid,this.amount);

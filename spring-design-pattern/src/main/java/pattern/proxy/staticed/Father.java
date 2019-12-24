@@ -7,16 +7,16 @@ public class Father {
 
     private Person person;
 
-    //æ²¡åŠæ³•æ‰©å±•
+    //Ã»°ì·¨À©Õ¹
     public Father(Person person){
         this.person = person;
     }
 
-    //ç›®æ ‡å¯¹è±¡çš„å¼•ç”¨ç»™æ‹¿åˆ°
+    //Ä¿±ê¶ÔÏóµÄÒıÓÃ¸øÄÃµ½
     public void findLove(){
-        System.out.println("æ ¹æ®ä½ çš„è¦æ±‚ç‰©è‰²");
+        System.out.println("¸ù¾İÄãµÄÒªÇóÎïÉ«");
         this.person.findLove();
-        System.out.println("åŒæ–¹çˆ¶æ¯æ˜¯ä¸æ˜¯åŒæ„");
+        System.out.println("Ë«·½¸¸Ä¸ÊÇ²»ÊÇÍ¬Òâ");
     }
 
 }

@@ -15,17 +15,12 @@ package pattern.singleton.hungry;
 
     //绝对线程安全，在线程还没出现以前就是实例化了，不可能存在访问安全问题
 public class Hungry {
-
     private Hungry(){}
     //先静态、后动态
     //先属性、后方法
     //先上后下
     private static final Hungry hungry = new Hungry();
-
     public static Hungry getInstance(){
-//        Hungry hungry;
-
         return  hungry;
     }
-
 }

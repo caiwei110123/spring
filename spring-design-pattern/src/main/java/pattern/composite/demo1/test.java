@@ -1,4 +1,4 @@
-package pattern.composite.code;
+package pattern.composite.demo1;
 
 public class test {
 

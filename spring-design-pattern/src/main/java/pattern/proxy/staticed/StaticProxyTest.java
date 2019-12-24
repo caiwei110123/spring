@@ -4,8 +4,8 @@ public class StaticProxyTest {
 
     public static void main(String[] args) {
 
-        //åªèƒ½å¸®å„¿å­æ‰¾å¯¹è±¡
-        //ä¸èƒ½å¸®è¡¨å¦¹ã€ä¸èƒ½å¸®é™Œç”Ÿäºº
+        //Ö»ÄÜ°ï¶ù×ÓÕÒ¶ÔÏó
+        //²»ÄÜ°ï±íÃÃ¡¢²»ÄÜ°ïÄ°ÉúÈË
         Father father = new Father(new Son());
 
         father.findLove();

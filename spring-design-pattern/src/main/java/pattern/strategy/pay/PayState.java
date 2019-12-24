@@ -1,7 +1,7 @@
 package pattern.strategy.pay;
 
 /**
- * æ”¯ä»˜å®Œæˆä»¥åçš„çŠ¶æ€
+ * Ö§¸¶Íê³ÉÒÔºóµÄ×´Ì¬
  * Created by Tom on 2018/3/11.
  */
 public class PayState {
@@ -15,7 +15,8 @@ public class PayState {
         this.msg = msg;
     }
 
+    @Override
     public String toString(){
-        return ("æ”¯ä»˜çŠ¶æ€ï¼š[" + code + "]," + msg + ",äº¤æ˜“è¯¦æƒ…ï¼š" + data);
+        return ("Ö§¸¶×´Ì¬£º[" + code + "]," + msg + ",½»Ò×ÏêÇé£º" + data);
     }
 }

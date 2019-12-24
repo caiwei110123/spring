@@ -10,29 +10,20 @@ import java.lang.reflect.Method;
  * Created by Tom on 2018/3/10.
  */
 public class CglibMeipo implements MethodInterceptor{
-
     public Object getInstance(Class<?> clazz) throws  Exception{
-
         Enhancer enhancer = new Enhancer();
-        //è¦æŠŠå“ªä¸ªè®¾ç½®ä¸ºå³å°†ç”Ÿæˆçš„æ–°ç±»çˆ¶ç±»
+        //Òª°ÑÄÄ¸öÉèÖÃÎª¼´½«Éú³ÉµÄĞÂÀà¸¸Àà
         enhancer.setSuperclass(clazz);
-
         enhancer.setCallback(this);
-
         return  enhancer.create();
-
     }
-
     @Override
     public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
-        //ä¸šåŠ¡çš„å¢å¼º
-
-        System.out.println("æˆ‘æ˜¯åª’å©†ï¼šæˆ‘è¦ç»™ä½ æ‰¾å¯¹è±¡ï¼Œç°åœ¨å·²ç»æ‹¿åˆ°ä½ çš„éœ€æ±‚");
-        System.out.println("å¼€å§‹ç‰©è‰²");
-
+        //ÒµÎñµÄÔöÇ¿
+        System.out.println("ÎÒÊÇÃ½ÆÅ£ºÎÒÒª¸øÄãÕÒ¶ÔÏó£¬ÏÖÔÚÒÑ¾­ÄÃµ½ÄãµÄĞèÇó");
+        System.out.println("¿ªÊ¼ÎïÉ«");
         methodProxy.invokeSuper(o,objects);
-
-        System.out.println("å¦‚æœåˆé€‚çš„è¯ï¼Œå°±å‡†å¤‡åŠäº‹");
+        System.out.println("Èç¹ûºÏÊÊµÄ»°£¬¾Í×¼±¸°ìÊÂ");
         return null;
     }
 }

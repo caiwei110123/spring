@@ -6,7 +6,7 @@ package pattern.proxy.cglib;
 public class ZhangSan {
 
     public void findLove(){
-        System.out.println("è‚¤ç™½è²Œç¾å¤§è±¡è…¿");
+        System.out.println("·ô°×Ã²ÃÀ´óÏóÍÈ");
     }
 
 }

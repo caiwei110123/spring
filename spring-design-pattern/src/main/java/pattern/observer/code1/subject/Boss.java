@@ -7,30 +7,10 @@ import java.lang.reflect.Method;
 
 public class Boss implements Subject ,InvocationHandler{
 
-
-    private String action;
-
-
-
-
     @Override
     public Object invoke(Object obj, Method m, Object[] o) throws Throwable {
         return m.invoke(obj,o);
     }
-
-
-
-
-    public String getAction() {
-        return action;
-    }
-
-
-    public void setAction(String action) {
-        this.action = action;
-    }
-
-
 
 
     @Override

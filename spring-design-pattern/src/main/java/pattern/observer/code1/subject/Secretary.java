@@ -7,32 +7,6 @@ import java.lang.reflect.Method;
 
 public class Secretary   implements Subject ,InvocationHandler {
 
-    private EventHandler update;
-
-    private String action;
-
-
-
-    //	public EventHandler getUpdate() {
-    //		return update;
-    //	}
-
-
-    public void setUpdate(EventHandler update) {
-        this.update = update;
-    }
-
-
-    public String getAction() {
-        return action;
-    }
-
-
-    public void setAction(String action) {
-        this.action = action;
-    }
-
-
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         System.out.println(456);

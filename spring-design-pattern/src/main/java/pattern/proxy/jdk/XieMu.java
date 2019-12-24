@@ -7,23 +7,27 @@ import pattern.proxy.staticed.Person;
  */
 public class XieMu implements Person {
 
+    @Override
     public void findLove(){
-        System.out.println("é«˜å¯Œå¸…");
-        System.out.println("èº«é«˜180cm");
-        System.out.println("èƒ¸å¤§ï¼Œ6å—è…¹è‚Œ");
+        System.out.println("¸ß¸»Ë§");
+        System.out.println("Éí¸ß180cm");
+        System.out.println("ĞØ´ó£¬6¿é¸¹¼¡");
 
     }
 
+    @Override
     public void zufangzi() {
-        System.out.println("ç§Ÿæˆ¿å­");
+        System.out.println("×â·¿×Ó");
     }
 
+    @Override
     public void buy() {
-        System.out.println("ä¹°ä¸œè¥¿");
+        System.out.println("Âò¶«Î÷");
     }
 
+    @Override
     public void findJob() {
-        System.out.println("æœˆè–ª20K-50k");
-        System.out.println("æ‰¾å·¥ä½œ");
+        System.out.println("ÔÂĞ½20K-50k");
+        System.out.println("ÕÒ¹¤×÷");
     }
 }

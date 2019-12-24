@@ -7,9 +7,10 @@ import pattern.strategy.pay.PayState;
  */
 public class JDPay implements Payment {
 
+    @Override
     public PayState pay(String uid, double amount) {
-        System.out.println("æ¬¢è¿ä½¿ç”¨äº¬ä¸œç™½æ¡");
-        System.out.println("æŸ¥è¯¢è´¦æˆ·ä½™é¢ï¼Œå¼€å§‹æ‰£æ¬¾");
-        return new PayState(200,"æ”¯ä»˜æˆåŠŸ",amount);
+        System.out.println("»¶Ó­Ê¹ÓÃ¾©¶«°×Ìõ");
+        System.out.println("²éÑ¯ÕË»§Óà¶î£¬¿ªÊ¼¿Û¿î");
+        return new PayState(200,"Ö§¸¶³É¹¦",amount);
     }
 }

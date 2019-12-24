@@ -1,4 +1,4 @@
-package pattern.composite.code;
+package pattern.composite.demo1;
 
 import java.util.ArrayList;
 import java.util.List;

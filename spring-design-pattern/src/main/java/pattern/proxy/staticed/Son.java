@@ -7,9 +7,9 @@ public class Son implements Person{
 
     public void findLove(){
 
-        //æˆ‘æ²¡æœ‰æ—¶é—´
-        //å·¥ä½œå¿™
-        System.out.println("æ‰¾å¯¹è±¡ï¼Œè‚¤ç™½è²Œç¾Žå¤§é•¿è…¿");
+        //ÎÒÃ»ÓÐÊ±¼ä
+        //¹¤×÷Ã¦
+        System.out.println("ÕÒ¶ÔÏó£¬·ô°×Ã²ÃÀ´ó³¤ÍÈ");
     }
 
     @Override

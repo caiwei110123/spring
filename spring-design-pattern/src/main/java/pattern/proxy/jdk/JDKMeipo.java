@@ -11,7 +11,7 @@ import java.lang.reflect.Proxy;
  * Created by Tom on 2018/3/10.
  */
 public class JDKMeipo implements InvocationHandler{
-    //è¢«ä»£ç†çš„å¯¹è±¡ï¼ŒæŠŠå¼•ç”¨ç»™ä¿å­˜ä¸‹æ¥
+    //±»´úÀíµÄ¶ÔÏó£¬°ÑÒıÓÃ¸ø±£´æÏÂÀ´
     private Person target;
 
     public Object getInstance(Person target) throws Exception{
@@ -19,19 +19,19 @@ public class JDKMeipo implements InvocationHandler{
 
        Class<?> clazz = target.getClass();
 
-        //ä¸‹åŠæˆªï¼Œè€å¸ˆæ·±å…¥åº•å±‚æ¥ç»™å¤§å®¶è®²è§£å­—èŠ‚ç æ˜¯å¦‚ä½•é‡ç»„çš„
-        //ç”¨æ¥ç”Ÿæˆä¸€ä¸ªæ–°çš„å¯¹è±¡ï¼ˆå­—èŠ‚ç é‡ç»„æ¥å®ç°ï¼‰
+        //ÏÂ°ë½Ø£¬ÀÏÊ¦ÉîÈëµ×²ãÀ´¸ø´ó¼Ò½²½â×Ö½ÚÂëÊÇÈçºÎÖØ×éµÄ
+        //ÓÃÀ´Éú³ÉÒ»¸öĞÂµÄ¶ÔÏó£¨×Ö½ÚÂëÖØ×éÀ´ÊµÏÖ£©
         return Proxy.newProxyInstance(clazz.getClassLoader(),clazz.getInterfaces(),this);
     }
 
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 
-        System.out.println("æˆ‘æ˜¯åª’å©†ï¼šæˆ‘è¦ç»™ä½ æ‰¾å¯¹è±¡ï¼Œç°åœ¨å·²ç»æ‹¿åˆ°ä½ çš„éœ€æ±‚");
-        System.out.println("å¼€å§‹ç‰©è‰²");
+        System.out.println("ÎÒÊÇÃ½ÆÅ£ºÎÒÒª¸øÄãÕÒ¶ÔÏó£¬ÏÖÔÚÒÑ¾­ÄÃµ½ÄãµÄĞèÇó");
+        System.out.println("¿ªÊ¼ÎïÉ«");
 
         method.invoke(this.target,args);
 
-        System.out.println("å¦‚æœåˆé€‚çš„è¯ï¼Œå°±å‡†å¤‡åŠäº‹");
+        System.out.println("Èç¹ûºÏÊÊµÄ»°£¬¾Í×¼±¸°ìÊÂ");
 
         return  null;
     }

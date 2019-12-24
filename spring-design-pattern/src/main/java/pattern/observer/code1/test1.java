@@ -19,7 +19,7 @@ public class test1 {
         //
         //通知相应的人员，老板来了请做正事！
         Object res = huhansan.invoke(st, st.getClass().getMethod("closeStock"), null);
-        //System.out.println(st.getName()+" "+res);
+        System.out.println(st.getName()+" "+res);
 
         //相应的人员收到通知后，给通知者酬劳
         Double money = (Double) huhansan.invoke(st, st.getClass().getMethod("giveObserverMoney",Double.class),

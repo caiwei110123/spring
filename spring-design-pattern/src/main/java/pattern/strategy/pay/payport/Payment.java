@@ -3,11 +3,11 @@ package pattern.strategy.pay.payport;
 import pattern.strategy.pay.PayState;
 
 /**
- * æ”¯ä»˜æ¸ é“
+ * Ö§¸¶ÇşµÀ
  * Created by Tom on 2018/3/11.
  */
 public interface Payment {
 
-    public PayState pay(String uid, double amount);
+      PayState pay(String uid, double amount);
 
 }

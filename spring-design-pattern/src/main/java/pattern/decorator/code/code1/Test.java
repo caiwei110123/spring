@@ -3,10 +3,10 @@ package pattern.decorator.code.code1;
 
 public class Test {
 	public static void main(String[] args) {
-		ConcreteCompnent concreteCompnent = new ConcreteCompnent();
-		ConcreteCompnentA  concreteCompnentA  = new ConcreteCompnentA();
-		concreteCompnentA.setComponent(concreteCompnent);
-		concreteCompnentA.Operation();
+		Component component = new ConcreteCompnent();
+		Decorator  decorator  = new ConcreteCompnentA();
+		decorator.setComponent(component);
+		decorator.Operation();
 
 
 		//ConcreteCompnentB concreteCompnentB  = new ConcreteCompnentB();
