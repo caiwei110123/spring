@@ -208,7 +208,7 @@ public interface BeanFactory {
 	 * @param requiredType type the bean must match; can be an interface or superclass.
 	 * {@code null} is disallowed.
 	 * @param args arguments to use when creating a bean instance using explicit arguments
-	 * (only applied when creating a new instance as opposed to retrieving an existing one)
+	 * (only applied when creating a new instance as opposed to retrieving an existing one)ConfigurableBeanFactory
 	 * @return an instance of the bean
 	 * @throws NoSuchBeanDefinitionException if there is no such bean definition
 	 * @throws BeanDefinitionStoreException if arguments have been given but

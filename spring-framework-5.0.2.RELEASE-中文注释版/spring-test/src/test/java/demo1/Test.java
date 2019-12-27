@@ -1,9 +1,6 @@
-package com.caiwei.demo1;
+package demo1;
 
-import com.caiwei.extenaltest.TestListableBeanFactory;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * 功能描述：
@@ -19,7 +16,7 @@ public class Test {
         //@SuppressWarnings("resource")
         //如果是web项目，则使用以下代码加载配置文件，如果是一般的Java项目，则使用注释的方式
         AnnotationConfigApplicationContext appCtx1 = new AnnotationConfigApplicationContext();
-        appCtx1.register(HelloWorldImpl2.class);
+
         appCtx1.scan("com.caiwei");
         appCtx1.refresh();
         System.out.println(appCtx1.getBean("helloWorldImpl1"));
