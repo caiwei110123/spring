@@ -2,8 +2,13 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/src/main/java/pattern/adapter/code/Target.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/pattern/composite/code/Component.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/main/java/pattern/composite/code/Composite.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/composite/code/Company.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/composite/code/ConcreteCompany.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/composite/code/Department1.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/composite/code/Department2.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/composite/code/Test.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/composite/demo1/Component.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/composite/demo1/Composite.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/pattern/factory/abs/demo1/Human.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/pattern/factory/abs/demo1/HumanEnum.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/pattern/factory/abs/demo1/HumanFactory.java" charset="GBK" />
@@ -54,6 +59,26 @@
     <file url="file://$PROJECT_DIR$/src/main/java/pattern/observer/subject/Observer.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/pattern/observer/subject/ObserverTest.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/pattern/observer/subject/Subject.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/proxy/cglib/CglibMeipo.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/proxy/cglib/CglibTest.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/proxy/cglib/ZhangSan.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/proxy/jdk/JDK58.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/proxy/jdk/JDKMeipo.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/proxy/jdk/JDKProxyTest.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/proxy/jdk/XieMu.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/proxy/staticed/Father.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/proxy/staticed/Person.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/proxy/staticed/Son.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/proxy/staticed/StaticProxyTest.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/strategy/pay/Order.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/strategy/pay/PayState.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/strategy/pay/PayStrategyTest.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/strategy/pay/payport/AliPay.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/strategy/pay/payport/JDPay.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/strategy/pay/payport/PayType.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/strategy/pay/payport/Payment.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/strategy/pay/payport/UnionPay.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/pattern/strategy/pay/payport/WechatPay.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/pattern/template/demo/Clienter.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/pattern/template/demo/HouseOne.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/pattern/template/demo/HouseTemplate.java" charset="GBK" />
