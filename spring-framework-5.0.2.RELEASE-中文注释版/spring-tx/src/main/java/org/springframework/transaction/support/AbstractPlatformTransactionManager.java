@@ -570,6 +570,7 @@ public abstract class AbstractPlatformTransactionManager implements PlatformTran
 
 
 	/**
+	 * 本方法做的事情主要就是抓取当前事务资源,事务基本信息以及事务回调transaction synchronization等塞到SuspendedResourcesHolder中返回。
 	 * Suspend the given transaction. Suspends transaction synchronization first,
 	 * then delegates to the {@code doSuspend} template method.
 	 * @param transaction the current transaction object
@@ -581,13 +582,23 @@ public abstract class AbstractPlatformTransactionManager implements PlatformTran
 	 */
 	@Nullable
 	protected final SuspendedResourcesHolder suspend(@Nullable Object transaction) throws TransactionException {
+		/*
+		 * 在TransactionSynchronizationManager的JavaDoc上已经写明了在需要进行transaction synchronization注册的时候需要先检查当前线程是否激活
+		 * isSynchronizationActive是去读TransactionSynchronizationManager中当前线程绑定的TransactionSynchronization集合是否为null。
+		 */
 		if (TransactionSynchronizationManager.isSynchronizationActive()) {
+			// 对所有本线程当前注册的transaction synchronization调用suspend方法。
 			List<TransactionSynchronization> suspendedSynchronizations = doSuspendSynchronization();
 			try {
 				Object suspendedResources = null;
 				if (transaction != null) {
+					// 挂起当前事务，由具体的TxMgr子类实现
 					suspendedResources = doSuspend(transaction);
 				}
+				/*
+				 * 将当前线程绑定的事务名,是否只读,隔离级别,是否有实际事务等信息抓取出来。
+				 * 与刚才抓取出来的transaction synchronization集合一起包到SuspendedResourcesHolder中返回。
+				 */
 				String name = TransactionSynchronizationManager.getCurrentTransactionName();
 				TransactionSynchronizationManager.setCurrentTransactionName(null);
 				boolean readOnly = TransactionSynchronizationManager.isCurrentTransactionReadOnly();
@@ -662,6 +673,7 @@ public abstract class AbstractPlatformTransactionManager implements PlatformTran
 	}
 
 	/**
+	 * getSynchronizations返回的是一个不可变的快照
 	 * Suspend all current synchronizations and deactivate transaction
 	 * synchronization for the current thread.
 	 * @return the List of suspended TransactionSynchronization objects
@@ -669,9 +681,11 @@ public abstract class AbstractPlatformTransactionManager implements PlatformTran
 	private List<TransactionSynchronization> doSuspendSynchronization() {
 		List<TransactionSynchronization> suspendedSynchronizations =
 				TransactionSynchronizationManager.getSynchronizations();
+		// 逐一挂起。
 		for (TransactionSynchronization synchronization : suspendedSynchronizations) {
 			synchronization.suspend();
 		}
+		// 清理之后除非重新init否则无法再register新的transaction synchronization了。
 		TransactionSynchronizationManager.clearSynchronization();
 		return suspendedSynchronizations;
 	}
@@ -701,12 +715,22 @@ public abstract class AbstractPlatformTransactionManager implements PlatformTran
 	 */
 	@Override
 	public final void commit(TransactionStatus status) throws TransactionException {
+		// 如果事务已经完成了,则抛出异常。
 		if (status.isCompleted()) {
 			throw new IllegalTransactionStateException(
 					"Transaction is already completed - do not call commit or rollback more than once per transaction");
 		}
 
 		DefaultTransactionStatus defStatus = (DefaultTransactionStatus) status;
+		/*
+		 * 通过前文的源码分析可以知道无论事务怎么传播,每一次进入事务拦截器,在进入业务方法之前都会把一个TransactionInfo对象塞到
+		 * transactionInfoHolder这个线程本地变量中。而TransactionInfo包含了一个TransactionStatus对象。
+		 * commit方法是在业务方法正常完成后调用的,所谓isLocalRollbackOnly就是读当前TransactionStatus对象中的rollbackOnly标志位。
+		 * 正如其名,它是一个局部的标志位，只有创建该status的那一层在业务方法执行完毕后会读到本层status的这个局部标志位。
+		 *
+		 * 我们可以在用户代码(业务方法或者切面)中通过TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+		 * 来置当前事务层的status对象的rollbackOnly标志位为true以手动控制回滚。
+		 */
 		if (defStatus.isLocalRollbackOnly()) {
 			if (defStatus.isDebug()) {
 				logger.debug("Transactional code has requested rollback");
@@ -714,7 +738,12 @@ public abstract class AbstractPlatformTransactionManager implements PlatformTran
 			processRollback(defStatus, false);
 			return;
 		}
-
+		/*
+		 * shouldCommitOnGlobalRollbackOnly默认实现是false。
+		 * 这里判断的语义就是如果发现事务被标记全局回滚并且在全局回滚标记情况下不应该提交事务的话,则进行回滚。
+		 *
+		 * 我们通常用的DataSourceTransactionManager对于isGlobalRollbackOnly的判断是去读status中transaction对象的ConnectionHolder的rollbackOnly标志位。
+		 */
 		if (!shouldCommitOnGlobalRollbackOnly() && defStatus.isGlobalRollbackOnly()) {
 			if (defStatus.isDebug()) {
 				logger.debug("Global transaction is marked as rollback-only but transactional code requested commit");
@@ -722,7 +751,13 @@ public abstract class AbstractPlatformTransactionManager implements PlatformTran
 			processRollback(defStatus, true);
 			return;
 		}
-
+		/*
+		 * isNewTransaction用来判断是否是最外层(事务边界)。
+		 * 举个例子:传播行为REQUIRE方法调REQUIRE方法再调REQUIRE方法,第三个方法抛出异常,第二个方法捕获,第一个方法走到这里会发现到了最外层事务边界。
+		 * 而failEarlyOnGlobalRollbackOnly是一个标志位,如果开启了则会尽早抛出异常。
+		 *
+		 * 默认情况下failEarlyOnGlobalRollbackOnly开关是关闭的。这样如果内层事务发生了异常,退栈到外层事务后，代码走到这里回滚完后会抛出UnexpectedRollbackException。
+		 */
 		processCommit(defStatus);
 	}
 
@@ -739,7 +774,9 @@ public abstract class AbstractPlatformTransactionManager implements PlatformTran
 			try {
 				boolean unexpectedRollback = false;
 				prepareForCommit(status);
+				// 钩子函数，TxMgr子类可以覆盖默认的空实现。
 				triggerBeforeCommit(status);
+				// 回调transaction synchronization的beforeCompletion方法。
 				triggerBeforeCompletion(status);
 				beforeCompletionInvoked = true;
 
@@ -750,6 +787,7 @@ public abstract class AbstractPlatformTransactionManager implements PlatformTran
 					unexpectedRollback = status.isGlobalRollbackOnly();
 					status.releaseHeldSavepoint();
 				}
+				// 最外层事务边界。
 				else if (status.isNewTransaction()) {
 					if (status.isDebug()) {
 						logger.debug("Initiating transaction commit");
@@ -763,6 +801,12 @@ public abstract class AbstractPlatformTransactionManager implements PlatformTran
 
 				// Throw UnexpectedRollbackException if we have a global rollback-only
 				// marker but still didn't get a corresponding exception from commit.
+				/*
+				 * 我们一般用的DataSourceTransactionManager是不会走到这里的。
+				 * 因为默认shouldCommitOnGlobalRollbackOnly开关是关闭的,检测到golobalRollbackOnly是不会走到processCommit方法的。
+				 *
+				 * 但shouldCommitOnGlobalRollbackOnly这个开关对于JtaTransactionManager来说是默认开启的,这里主要是需要针对检测到globalRollbackOnly但是doCommit没有抛出异常的情况。
+				 */
 				if (unexpectedRollback) {
 					throw new UnexpectedRollbackException(
 							"Transaction silently rolled back because it has been marked as rollback-only");

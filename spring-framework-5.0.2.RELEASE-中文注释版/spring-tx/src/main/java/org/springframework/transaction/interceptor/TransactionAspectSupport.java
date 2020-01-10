@@ -512,6 +512,7 @@ public abstract class TransactionAspectSupport implements BeanFactoryAware, Init
 			@Nullable TransactionStatus status) {
 
 		TransactionInfo txInfo = new TransactionInfo(tm, txAttr, joinpointIdentification);
+		// 事务方法。
 		if (txAttr != null) {
 			// We need a transaction for this method...
 			if (logger.isTraceEnabled()) {
@@ -521,6 +522,7 @@ public abstract class TransactionAspectSupport implements BeanFactoryAware, Init
 			txInfo.newTransactionStatus(status);
 		}
 		else {
+			// 非事务方法。
 			// The TransactionInfo.hasTransaction() method will return false. We created it only
 			// to preserve the integrity of the ThreadLocal stack maintained in this class.
 			if (logger.isTraceEnabled())
@@ -531,6 +533,7 @@ public abstract class TransactionAspectSupport implements BeanFactoryAware, Init
 		// We always bind the TransactionInfo to the thread, even if we didn't create
 		// a new transaction here. This guarantees that the TransactionInfo stack
 		// will be managed correctly even if no transaction was created by this aspect.
+		// 无论是否创建了新事务,这里都会把当前的txInfo对象通过threadLocal变量绑定到当前线程。
 		txInfo.bindToThread();
 		return txInfo;
 	}

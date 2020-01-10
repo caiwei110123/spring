@@ -127,7 +127,7 @@ public abstract class AopConfigUtils {
 	 */
 	//把自动代理创建器初始化成BeanDefinition，内部会有一些判断逻辑
 	/**
-	 * 默认使用的代理创建器是AspectJAwareAdvisorAutoProxyCreator，如果已经注册了对应的自动代理创建器并且名字不相同，则比较一下优先级，最终目的就是生成BeanDefinition。
+	 * 默认使用的代理创建器是 AspectJAwareAdvisorAutoProxyCreator，如果已经注册了对应的自动代理创建器并且名字不相同，则比较一下优先级，最终目的就是生成BeanDefinition。
 	 * (这里怎么会已经存在自动代理创建器AUTO_PROXY_CREATOR_BEAN_NAME的？这个可以在spring的配置文件中指定，也可以在spring的beanFactory启动后用自定义扩展点手动设置进去，spring的对象工厂就是这么灵活，处处可以设置对象，可以设置任何对象。)
 	 * @param cls
 	 * @param registry
