@@ -17,7 +17,10 @@ public class ConvertController {
 
 	@GetMapping("primitive")
 	public String primitive(@RequestParam Integer value) {
-		return "Converted primitive " + value;
+		System.out.println("enter");
+		String result =  "Converted primitive " + value;
+		System.out.println("end");
+		return result;
 	}
 
 	// requires Joda-Time on the classpath

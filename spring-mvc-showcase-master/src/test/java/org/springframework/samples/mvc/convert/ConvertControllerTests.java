@@ -10,11 +10,13 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
+import net.minidev.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.format.support.DefaultFormattingConversionService;
 import org.springframework.format.support.FormattingConversionService;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 
 public class ConvertControllerTests {
 	
@@ -33,15 +35,20 @@ public class ConvertControllerTests {
 
 	@Test
 	public void primitive() throws Exception {
-		this.mockMvc.perform(get("/convert/primitive").param("value", "3"))
+		ResultActions resultActions =  this.mockMvc.perform(get("/convert/primitive").param("value", "3"))
 				.andExpect(content().string("Converted primitive 3"));
+
+		System.out.println("===============");
+		System.out.println(resultActions.andReturn().getResponse().getContentAsString());
 	}
 
 	@Test
 	public void date() throws Exception {
 		String timezone = getTimezone(2010, 7, 4);
-		this.mockMvc.perform(get("/convert/date/2010-07-04"))
+		ResultActions resultActions = this.mockMvc.perform(get("/convert/date/2010-07-04"))
 				.andExpect(content().string("Converted date Sun Jul 04 00:00:00 " + timezone + " 2010"));
+		System.out.println("===============");
+		System.out.println(resultActions);
 	}
 
 	@Test

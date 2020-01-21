@@ -23,7 +23,11 @@ public class MessageConvertersController {
 
 	@PostMapping("/string")
 	public String readString(@RequestBody String string) {
-		return "Read string '" + string + "'";
+		System.out.println("begin");
+		String result = "Read string '" + string + "'";
+
+		System.out.println("end");
+		return result;
 	}
 
 	@GetMapping("/string")
