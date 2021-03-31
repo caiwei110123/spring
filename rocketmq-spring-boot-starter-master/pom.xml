@@ -30,7 +30,7 @@
         <aliyun.openservices.version>1.8.4.Final</aliyun.openservices.version>
         <protostuff-runtime>1.6.1</protostuff-runtime>
         <protostuff-core>1.6.1</protostuff-core>
-        <google.guava.version>28.1-jre</google.guava.version>
+        <google.guava.version>29.0-jre</google.guava.version>
         <maven.gpg.plugin>1.6</maven.gpg.plugin>
         <maven.javadoc.plugin>3.1.1</maven.javadoc.plugin>
     </properties>
